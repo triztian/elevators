@@ -1,4 +1,0 @@
-[0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
-[0m[[0m[0mdebug[0m] [0m[0m	(/Users/Tristian/Repositories/github.com/valued-co/dev-triztian/conf/logback.xml,/Users/Tristian/Repositories/github.com/valued-co/dev-triztian/target/scala-2.13/classes/logback.xml)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(/Users/Tristian/Repositories/github.com/valued-co/dev-triztian/conf/application.conf,/Users/Tristian/Repositories/github.com/valued-co/dev-triztian/target/scala-2.13/classes/application.conf)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(/Users/Tristian/Repositories/github.com/valued-co/dev-triztian/conf/routes,/Users/Tristian/Repositories/github.com/valued-co/dev-triztian/target/scala-2.13/classes/routes)[0m
