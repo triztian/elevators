@@ -16,6 +16,6 @@ public final class ElevatorSystem {
 
   public void start() {
 	for(Elevator e : elevators)
-		e.run();
+		e.start();
   }
 }
