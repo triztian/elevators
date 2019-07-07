@@ -7,11 +7,9 @@ import elevators.ElevatorSystem;
 
 public class ElevatorModule extends AbstractModule {
 	
-	private ElevatorSystem elevatorSystem = new ElevatorSystem();
-	
 	@Override
 	protected void configure() {
-		elevatorSystem.start();
+		ElevatorSystem.getInstance().start();
 	}
 	
 }
