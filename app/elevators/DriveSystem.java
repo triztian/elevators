@@ -1,7 +1,8 @@
-package elevator;
+package elevators;
 
 import java.lang.*;
 import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * The DriveSystem "powers" each elevator's move
@@ -32,11 +33,12 @@ public class DriveSystem extends Timer {
 		}
 
 		currentTask = task;
-		schedulAtFixedRate(task, 0, TimeUnit.SECONDS); // every second
+
+		start();
 	}
 
-	@Override
-	public void run() {
-		schedulAtFixedRate(this.task, 0, TimeUnit.SECONDS); // every second
+	public void start() {
+		scheduleAtFixedRate(currentTask, 0, TimeUnit.SECONDS.toMillis(1)); // every second
 	}
+
 }
