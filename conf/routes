@@ -9,8 +9,9 @@ GET     /                           controllers.HomeController.index
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 
-POST 	/floor/:callFloor/to/:destinationFloor
+POST 	/floor/:callFloor/to/:destinationFloor	controllers.ElevatorController.postCallDestination(fromFloor: Integer, toFloor: Integer)
+POST 	/floor/:callFloor	controllers.ElevatorController.postCall(toFloor: Integer)
 
 # Returns the elevators internal state.
-GET 	/elevator/:elevatorID
+GET 	/elevator/:elevatorID	controllers.ElevatorController.getElevator(id: Integer)
 
