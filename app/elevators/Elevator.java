@@ -16,12 +16,11 @@ public final class Elevator {
 
 	private DriveSystem driveSystem;
 
-	private Queue<Floor> floorsQueue = new PriorityBlockingQueue<>();
+	private Queue<Floor> floorQueue = new PriorityBlockingQueue<>();
 
 	private Floor targetFloor = null;
 
 	private Floor currentFloor = null;
-
 
 	public Elevator() {
 		this.driveSystem = new DriveSystem(this.new MoveTask());
@@ -32,19 +31,16 @@ public final class Elevator {
 	 */
 	private void move() {
 
-		if (targetFloor == null && requestFloor.peek() == null) {
-			moving = true;
-			return;
-		}
-		
 		if (targetFloor == null) {
-			targetFloor = requestFloor.poll();
-			moving = true;
+			targetFloor = floorQueue.poll();
+		}
+
+		if (targetFloor == null) {
+			return;
 		}
 
 		if (targetFloor == currentFloor) {
-			moving = false;
-			return
+			return;
 		}
 			
 		if (getDirection() == Direction.UP)
@@ -59,15 +55,15 @@ public final class Elevator {
 	 * Calls the elevator to a specific floor without a destination.
 	 */
 	public synchronized void call(final Floor from) {
-		floorsQueue.put(from);
+		floorQueue.offer(from);
 	}
 
 	/**
 	 * Calls the elevator to a specific floor with a given destination floor.
 	 */
 	public synchronized void call(final Floor from, final Floor destination) {
-		floorsQueue.put(from);
-		floorsQueue.put(destination);
+		floorQueue.offer(from);
+		floorQueue.offer(destination);
 	}
 
 	/**
@@ -94,6 +90,10 @@ public final class Elevator {
 		public void run() {
 			move(); // method on Elevator
 		}
+	}
+
+	public synchronized void start() {
+		driveSystem.start();
 	}
 
 }
