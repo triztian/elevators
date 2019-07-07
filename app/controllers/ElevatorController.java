@@ -6,7 +6,7 @@ import play.mvc.*;
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
  */
-public class HomeController extends Controller {
+public class ElevatorController extends Controller {
 
     /**
      * An action that renders an HTML page with a welcome message.
@@ -27,7 +27,7 @@ public class HomeController extends Controller {
 	}
 
 	public Result getElevator(int id) {
-		return ok("getElevator")
+		return ok("getElevator");
 	}
 
 }
