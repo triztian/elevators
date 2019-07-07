@@ -16,6 +16,18 @@ public class HomeController extends Controller {
      */
     public Result index() {
         return ok(views.html.index.render());
-    }
+	}
+
+	public Result postCall(int toFloor) {
+		return ok("postCall");
+	}
+
+	public Result postCallDestination(int fromFloor, int toFloor) {
+		return ok("postCallDestination");
+	}
+
+	public Result getElevator(int id) {
+		return ok("getElevator")
+	}
 
 }
