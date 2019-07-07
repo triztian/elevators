@@ -39,7 +39,22 @@ public final class ElevatorSystem {
   }
 
   public Status getStatus() {
-	return null;
+
+	Status status = new Status();
+	for (Elevator e : elevators) {
+		Map<String, Object> el = new HashMap<>();
+		el.put("currentFloor", e.getCurrentFloor());
+
+		if (e.isMoving()) {
+			el.put("destinationFloor", e.getDestinationFloor());
+			el.put("direction", e.getDirection());
+		}
+
+		status.elevators.add(el);
+	}
+
+	return status;
+
   }
 
   // ---- Static synchronized proxy methods -----
@@ -65,7 +80,7 @@ public final class ElevatorSystem {
    * This class is a snapshot of the Elevator system.
    */
   public static final class Status {
-
+	public final List<Map<String, Object>> elevators = new ArrayList<>();
   }
 
 }
