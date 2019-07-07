@@ -9,10 +9,12 @@ import play.test.WithApplication;
 
 import static org.junit.Assert.assertEquals;
 import static play.mvc.Http.Status.OK;
+import static play.mvc.Http.Status.BAD_REQUEST;
 import static play.test.Helpers.GET;
 import static play.test.Helpers.route;
+import static play.test.Helpers.*;
 
-public class HomeControllerTest extends WithApplication {
+public class ElevatorControllerTest extends WithApplication {
 
     @Override
     protected Application provideApplication() {
@@ -20,13 +22,28 @@ public class HomeControllerTest extends WithApplication {
     }
 
     @Test
-    public void testIndex() {
+    public void testGetElevatorSuccess() {
         Http.RequestBuilder request = new Http.RequestBuilder()
                 .method(GET)
-                .uri("/");
+                .uri("/elevator/0");
 
-        Result result = route(app, request);
-        assertEquals(OK, result.status());
+		Result result = route(app, request);
+		assertEquals(OK, result.status());
+		System.out.println(contentAsString(result));
+
+	}
+	
+    @Test
+    public void testGetElevatorInvalidID() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .uri("/elevator/99");
+
+		Result result = route(app, request);
+		assertEquals(BAD_REQUEST, result.status());
+
+		System.out.println(contentAsString(result));
+
     }
 
 }

@@ -64,6 +64,10 @@ public class ElevatorController extends Controller {
 
 	public Result getElevator(int id) {
 
+		if (id < 0 || id > 2) {
+			return badRequest(Json.toJson(new APIError("invalid elevator", "id must be between 0 and 2")));
+		}
+
 		ElevatorSystem.Status status = ElevatorSystem.status();
 
 		APIElevatorStatus apiStatus = convertElevatorStatusToAPIResponse(status);
@@ -73,6 +77,7 @@ public class ElevatorController extends Controller {
 	}
 
 	public static APIElevatorStatus convertElevatorStatusToAPIResponse(ElevatorSystem.Status status) {
+
 		APIElevatorStatus apiStatus = new APIElevatorStatus();
 
 		int elevatorID = 0;

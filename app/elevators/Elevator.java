@@ -22,7 +22,9 @@ public final class Elevator {
 
 	private Floor targetFloor = null;
 
-
+	/**
+	 * 
+	 */
 	public Elevator() {
 		this.driveSystem = new DriveSystem(this.new MoveTask());
 	}
