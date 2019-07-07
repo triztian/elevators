@@ -62,6 +62,7 @@ public enum Floor {
 	 * Determines whether this floor is below another one.
 	 */
 	public boolean isBelow(Floor other) {
+		if (other == null) return false;
 		return ordinal() < other.ordinal();
 	}
 
@@ -69,6 +70,7 @@ public enum Floor {
 	 * Determines whether this floor is above another one.
 	 */
 	public boolean isAbove(Floor other) {
+		if (other == null) return false;
 		return ordinal() > other.ordinal();
 	}
 }
