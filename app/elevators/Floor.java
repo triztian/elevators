@@ -22,6 +22,22 @@ public enum Floor {
 	SIXTEENTH;
 
 	/**
+	 * Obtain the Floor from a given number.
+	 * 
+	 * @throws IllegalArgumentException if the number is less than 0 or greater than 16.
+	 */
+	public static Floor fromNumber(int number) {
+		if (number < GROUND.ordinal()) 
+			throw new IllegalArgumentException("number must be greater than 0");
+
+		if (number > SIXTEENTH.ordinal()) 
+			throw new IllegalArgumentException("number must be less or equal to 16");
+
+
+		return Floor.values()[number];
+	}
+
+	/**
 	 * Return the next floor. If the value represents the l
 	 * last floor; the last floor is returned.
 	 */
