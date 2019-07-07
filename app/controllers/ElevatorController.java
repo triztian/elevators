@@ -1,6 +1,10 @@
 package controllers;
 
 import play.mvc.*;
+import play.libs.Json;
+
+import elevators.Floor;
+import elevators.ElevatorSystem;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -19,15 +23,55 @@ public class ElevatorController extends Controller {
 	}
 
 	public Result postCall(int toFloor) {
-		return ok("postCall");
+		try {
+			Floor floor = Floor.fromNumber(toFloor);
+			ElevatorSystem.callFrom(floor);
+
+			ElevatorSystem.Status status = ElevatorSystem.status();
+
+			return ok(Json.toJson(convertElevatorStatusToAPIResponse(status)));
+
+		} catch(IllegalArgumentException ex) {
+			return badRequest(Json.toJson(new APIError("invalid floor", ex.getMessage())));
+		}
 	}
 
 	public Result postCallDestination(int fromFloor, int toFloor) {
-		return ok("postCallDestination");
+
+		Floor from, to;
+
+		try {
+			from = Floor.fromNumber(fromFloor);
+		} catch(IllegalArgumentException ex) {
+			return badRequest(Json.toJson(new APIError("invalid call floor", ex.getMessage())));
+		}
+
+		try {
+			to = Floor.fromNumber(toFloor);
+		} catch(IllegalArgumentException ex) {
+			return badRequest(Json.toJson(new APIError("invalid destination floor", ex.getMessage())));
+		}
+
+		ElevatorSystem.callFromTo(from, to);
+
+		ElevatorSystem.Status status = ElevatorSystem.status();
+
+		return ok(Json.toJson(convertElevatorStatusToAPIResponse(status)));
+
 	}
 
 	public Result getElevator(int id) {
-		return ok("getElevator");
+
+		ElevatorSystem.Status status = ElevatorSystem.status();
+
+		APIElevatorStatus apiStatus = convertElevatorStatusToAPIResponse(status);
+
+		return ok(Json.toJson(apiStatus.elevators.get(id)));
+
+	}
+
+	public static APIElevatorStatus convertElevatorStatusToAPIResponse(ElevatorSystem.Status status) {
+		return null;
 	}
 
 }
