@@ -76,4 +76,19 @@ public class ElevatorControllerTest extends WithApplication {
 
 	}
 
+	@Test
+	public void testGetFloorsSuccess() {
+	
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .uri("/floors");
+
+		Result result = route(app, request);
+
+		assertEquals(OK, result.status());
+
+		System.out.println(contentAsString(result));
+
+	}
+
 }

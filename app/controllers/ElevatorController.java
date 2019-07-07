@@ -76,6 +76,20 @@ public class ElevatorController extends Controller {
 
 	}
 
+	/**
+	 * Provides a list of floors
+	 */
+	public Result getFloors() {
+
+		List<APIFloor> floors = new ArrayList<>();
+		for(Floor f : Floor.values()) {
+			floors.add(new APIFloor(f.toString(), f.ordinal()));
+		}
+
+		return ok(Json.toJson(floors));
+
+	}
+
 	public static APIElevatorStatus convertElevatorStatusToAPIResponse(ElevatorSystem.Status status) {
 
 		APIElevatorStatus apiStatus = new APIElevatorStatus();
