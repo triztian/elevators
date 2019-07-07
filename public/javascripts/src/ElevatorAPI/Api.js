@@ -1,7 +1,7 @@
 /**
  * 
  */
-export default class ElevatorAPI {
+class ElevatorAPI {
 
 	/**
 	 * Returns a promise that when resolved contains an array of the 
@@ -9,10 +9,15 @@ export default class ElevatorAPI {
 	 */
 	listFloors() {
 		return new Promise((resolve, reject) => {
+			// TODO: Perform actual API call
 			resolve([
 				{
 					name: 'Ground',
 					number: 0
+				},
+				{
+					name: 'First',
+					number: 1
 				}
 			]);
 		});
@@ -25,6 +30,15 @@ export default class ElevatorAPI {
 	 */
 	callElevator(from, to) {
 
+		let endpoint = `http://localhost:9000/floor/${from}`;
+		if (Number.isInteger(to)) {
+			endpoint += `/to/${to}`
+		}
+		
+		return fetch(endpoint, { 
+			method: 'POST' 
+		});
+
 	}
 
 	/**
@@ -35,3 +49,7 @@ export default class ElevatorAPI {
 		
 	}
 }
+
+let api = new ElevatorAPI();
+
+export default api;
