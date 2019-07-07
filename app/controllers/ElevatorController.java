@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.*;
+
 import play.mvc.*;
 import play.libs.Json;
 
@@ -71,7 +73,27 @@ public class ElevatorController extends Controller {
 	}
 
 	public static APIElevatorStatus convertElevatorStatusToAPIResponse(ElevatorSystem.Status status) {
-		return null;
+		APIElevatorStatus apiStatus = new APIElevatorStatus();
+
+		int elevatorID = 0;
+		for (Map<String, Object> elevator : status.elevators) {
+			if (elevator.containsKey("direction")) {
+				apiStatus.elevators.add(new APIElevatorStatus.Elevator(
+					"E" + String.valueOf(elevatorID), 
+					elevator.get("currentFloor").toString(),
+					elevator.get("destinationFloor").toString(),
+					elevator.get("direction").toString()
+				));
+			} else {
+				apiStatus.elevators.add(new APIElevatorStatus.Elevator(
+					"E" + String.valueOf(elevatorID), 
+					elevator.get("currentFloor").toString()
+				));
+			}
+			elevatorID++;
+		}
+
+		return apiStatus;
 	}
 
 }
