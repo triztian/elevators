@@ -1,6 +1,9 @@
 package elevators;
 
 /**
+ * Represents the number of available floors for this SPECIFIC building.
+ * Should the floors be more than say 20 then this class should be converted into a 
+ * list of special floors and their numbers and the rest should be handled by `int`.
  */
 public enum Floor {
 	GROUND,
