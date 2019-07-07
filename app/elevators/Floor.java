@@ -1,4 +1,4 @@
-package elevator;
+package elevators;
 
 /**
  */
@@ -29,7 +29,7 @@ public enum Floor {
 		if (this == SIXTEENTH) 
 			return SIXTEENTH;
 
-		return Floor.valueOf(this.ordinal() + 1);
+		return Floor.values()[ordinal()+1];
 	}
 
 	/**
@@ -39,20 +39,20 @@ public enum Floor {
 	public Floor previous() {
 		if (this == GROUND) return GROUND;
 
-		return Floor.valueOf(this.ordinal() -1);
+		return Floor.values()[ordinal()-1];
 	}
 
 	/**
-	 * 
+	 * Determines whether this floor is below another one.
 	 */
 	public boolean isBelow(Floor other) {
-		return this.ordinal() < other.ordinal()
+		return ordinal() < other.ordinal();
 	}
 
 	/**
-	 * 
+	 * Determines whether this floor is above another one.
 	 */
 	public boolean isAbove(Floor other) {
-		return this.ordinal() > other.ordinal()
+		return ordinal() > other.ordinal();
 	}
 }
