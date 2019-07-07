@@ -8,37 +8,20 @@ import java.util.concurrent.*;
  * The DriveSystem "powers" each elevator's move
  * action ("task"). 
  */
-public class DriveSystem extends Timer {
+public final class DriveSystem {
 
-	public static boolean IS_DAEMON = true;
+	private Runnable currentTask;
 
-	private TimerTask currentTask;
+	private ScheduledFuture<?> future;
 
-	public DriveSystem() {
-		super(IS_DAEMON); 
-	}
+	private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
 
-	public DriveSystem(TimerTask task) {
-		super(IS_DAEMON); 
+	public DriveSystem(Runnable task) {
 		this.currentTask = task;
 	}
 
-	/**
-	 * Sets the system's task, if a previous task exists it is cancelled 
-	 * and set to `null`
-	 */
-	public void setTask(TimerTask task) {
-		if (currentTask != null) {
-			currentTask.cancel();
-		}
-
-		currentTask = task;
-
-		start();
-	}
-
 	public void start() {
-		scheduleAtFixedRate(currentTask, 0, TimeUnit.SECONDS.toMillis(1)); // every second
+		future = executor.scheduleAtFixedRate(currentTask, 0, 1, TimeUnit.SECONDS);
 	}
 
 }

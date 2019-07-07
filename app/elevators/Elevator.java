@@ -101,7 +101,7 @@ public final class Elevator {
 		return getDirection() != Direction.NONE;
 	}
 
-	private class MoveTask extends TimerTask {
+	private class MoveTask implements Runnable {
 		@Override
 		public void run() {
 			move(); // method on Elevator
