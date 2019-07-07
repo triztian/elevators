@@ -44,6 +44,36 @@ public class ElevatorControllerTest extends WithApplication {
 
 		System.out.println(contentAsString(result));
 
-    }
+	}
+	
+	@Test
+	public void testPostCallSuccess() {
+
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(POST)
+                .uri("/floor/10");
+
+		Result result = route(app, request);
+
+		System.out.println(contentAsString(result));
+
+		assertEquals(OK, result.status());
+
+
+	}
+
+	@Test
+	public void testPostCallInvalidFloor() {
+
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(POST)
+                .uri("/floor/99");
+
+		Result result = route(app, request);
+		assertEquals(BAD_REQUEST, result.status());
+
+		System.out.println(contentAsString(result));
+
+	}
 
 }
