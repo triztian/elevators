@@ -10,18 +10,21 @@ export default function App() {
 	const [floors, setFloors] = useState([]);
 	
 	useEffect(() => {
-		ElevatorAPI.listFloors().then((f) => {
-			setFloors(f.map((floor) => {
-				return <Floor key={`f${floor.number}`} floors={f} floorName={floor.name} floorNumber={floor.number} />
-			}));
-		}).catch(err => {
-			console.error('listFlors: ', err)
+
+		ElevatorAPI.listFloors()
+		.then(setFloors)
+		.catch(err => {
+			console.error('listFloors: ', err)
 		});
-	});
+
+	}, [floors]);
 	
 	return (
 		<div className="App">
-		<div className="floors">{floors}</div>
+			<h1 className="App-Header">Elevator</h1>
+			<div className="Floors">{floors.reverse().map(floor => {
+				return <Floor key={`f${floor.number}`} floors={floors} floorName={floor.name} floorNumber={floor.number} />
+			})}</div>
 		</div>
-		);
+	);
 }
