@@ -9,8 +9,8 @@ import actors.ElevatorWebSocketActor;
 import util.RangeLooper;
 
 /**
-* 
-*/
+ * 
+ */
 public final class ElevatorSystem {
 	
 	/**
@@ -82,6 +82,13 @@ public final class ElevatorSystem {
 	public void call(Floor from) {
 		elevators.get(elevator.next()).call(from);
 	}
+
+	/**
+	 * Call the elevator from a floor with a specific destination floor.
+	 */
+	public void call(Floor from, Floor to) {
+		elevators.get(elevator.next()).call(from, to);
+	}
 	
 	/**
 	 * Provides a readonly view of the elevator's status.
@@ -107,10 +114,6 @@ public final class ElevatorSystem {
 	}
 
 	// ---- Static synchronized proxy methods -----
-	
-	public void call(Floor from, Floor to) {
-		elevators.get(elevator.next()).call(from, to);
-	}
 	
 	public static synchronized void callFrom(Floor from) {
 		instance.call(from);
