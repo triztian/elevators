@@ -13,6 +13,8 @@ POST 	/floor/:fromFloor/to/:toFloor	controllers.ElevatorController.postCallDesti
 
 # Returns the elevators internal state.
 GET 	/elevator/:id			controllers.ElevatorController.getElevator(id: Integer)
+GET     /elevator/:id/updates	controllers.ElevatorController.websocketUpdates(id: Integer)
 
 GET		/floors					controllers.ElevatorController.getFloors
+
 
