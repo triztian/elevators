@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
+import './css/App.css';
 
-import ElevatorAPI from './ElevatorAPI/Api'
+import ElevatorAPI from './Api'
 
 import Floor from './Floor'
 import Elevator from './Elevator'
@@ -13,12 +13,11 @@ export default function App() {
 	useEffect(() => {
 
 		ElevatorAPI.listFloors()
-		.then(setFloors)
-		.catch(err => {
-			console.error('listFloors: ', err)
-		});
-
-	}, [floors]);
+			.then(setFloors)
+			.catch(err => {
+				console.error('listFloors: ', err)
+			});
+	}, []);
 	
 	return (
 		<div className="App">

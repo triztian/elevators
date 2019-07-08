@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import './FloorSelector.css'
+import './css/FloorSelector.css'
 
 export default function FloorSelector(props) {
 

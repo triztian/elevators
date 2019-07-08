@@ -2,7 +2,7 @@ import React from 'react'
 
 import ControlPanel from "./ControlPanel";
 
-import './Floor.css'
+import './css/Floor.css'
 
 export default function Floor(props) {
 

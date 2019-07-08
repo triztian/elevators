@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
-import ElevatorAPI from './ElevatorAPI/Api'
-import './Elevator.css'
+import ElevatorAPI from './Api'
+import './css/Elevator.css'
 
 export default function Elevator(props) {
 

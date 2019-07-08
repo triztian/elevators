@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 
 import CallButton from './CallButton'
 import FloorSelector from './FloorSelector'
-import './ControlPanel.css'
+import './css/ControlPanel.css'
 
-import ElevatorAPI from './ElevatorAPI/Api'
+import ElevatorAPI from './Api'
 
 const noneSelectedFloor = -1;
 
