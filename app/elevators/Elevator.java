@@ -3,6 +3,9 @@ package elevators;
 import java.util.concurrent.*;
 import java.util.*;
 
+
+import org.slf4j.Logger;
+
 /**
  * 
  */
@@ -14,6 +17,8 @@ public final class Elevator {
 		NONE;
 	}
 
+	public final String ID;
+
 	private DriveSystem driveSystem;
 
 	private Queue<Floor> floorQueue = new PriorityBlockingQueue<>();
@@ -22,18 +27,23 @@ public final class Elevator {
 
 	private Floor targetFloor = null;
 
-	/**
-	 * 
-	 */
-	public Elevator() {
-		this.driveSystem = new DriveSystem(this.new MoveTask());
-	}
+	private Logger logger = null;
 
+	/**
+	 * Create a new elevator.
+	 */
+	public Elevator(final String id, Logger logger) {
+		this.ID = id;
+		this.driveSystem = new DriveSystem(this.new MoveTask());
+		this.logger = logger;
+	}
 
 	/**
 	 * Moves the elevator to the next in the direction of the target floor.
 	 */
 	private void move() {
+
+		debug("currentFloor: {}, targetFloor: {}, direction: {}", currentFloor, targetFloor, getDirection());
 
 		if (targetFloor == null) {
 			targetFloor = floorQueue.poll();
@@ -44,6 +54,8 @@ public final class Elevator {
 		}
 
 		if (targetFloor == currentFloor) {
+			currentFloor = targetFloor;
+			targetFloor = null;
 			return;
 		}
 			
@@ -59,15 +71,19 @@ public final class Elevator {
 	 * Calls the elevator to a specific floor without a destination.
 	 */
 	public synchronized void call(final Floor from) {
+
 		floorQueue.offer(from);
+
 	}
 
 	/**
 	 * Calls the elevator to a specific floor with a given destination floor.
 	 */
 	public synchronized void call(final Floor from, final Floor destination) {
+
 		floorQueue.offer(from);
 		floorQueue.offer(destination);
+
 	}
 
 	/**
@@ -112,6 +128,25 @@ public final class Elevator {
 
 	public synchronized void start() {
 		driveSystem.start();
+	}
+
+	// --- logging helpers --
+
+	private void info(final String format, Object... args) {
+
+		if (logger == null) return;
+
+		logger.info(ID + " " + format, args);
+
+	}
+
+	private void debug(final String format, Object... args) {
+
+		if (logger == null) return;
+
+
+		logger.debug(ID + " " + format, args);
+
 	}
 
 }

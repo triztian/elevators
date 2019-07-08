@@ -2,6 +2,12 @@ package elevators;
 
 import java.util.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * 
+ */
 public final class ElevatorSystem {
 	
   private static ElevatorSystem instance = null;
@@ -22,9 +28,11 @@ public final class ElevatorSystem {
 
   private ElevatorSystem() {
 
-	elevators.add(new Elevator());
-	elevators.add(new Elevator());
-	elevators.add(new Elevator());
+	final Logger elevatorLogger = LoggerFactory.getLogger("elevator");
+
+	elevators.add(new Elevator("E0", elevatorLogger));
+	elevators.add(new Elevator("E1", elevatorLogger));
+	elevators.add(new Elevator("E2", elevatorLogger));
 
   }
 
