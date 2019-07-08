@@ -9,7 +9,7 @@ class ElevatorAPI {
 	 */
 	async listFloors() {
 		const endpoint = `http://localhost:9000/floors`
-		return fetch(endpoint).then(r => r.json());
+		return fetch(endpoint, {mode: 'cors'}).then(r => r.json());
 	}
 
 	/**
@@ -37,8 +37,16 @@ class ElevatorAPI {
 	 * @param {*} onUpdate The function to be called on any message
 	 */
 	watchElevator(elevatorID, onUpdate) {
+
+		let id = elevatorID;
+		if (elevatorID.startsWith('E')) {
+			id = elevatorID.substring(1);
+		}
+
+		const endpoint = `ws://localhost:9000/elevator/${id}/updates`;
+
 		return new Promise((resolve, reject) => {
-			let ws = new WebSocket(`http://localhost:9000/elevator/${elevatorID}/updates`, '*');
+			let ws = new WebSocket(endpoint, '*');
 
 			const stop = () => {
 				ws.close()
@@ -53,7 +61,13 @@ class ElevatorAPI {
 			}
 
 			ws.onmessage = evt => {
-				onUpdate(JSON.parse(evt.data));
+
+				let elevator = JSON.parse(evt.data);
+
+				// FIXME: This filtering should happen on the server.
+				if (`E${id}` === elevator.ID) {
+					onUpdate(elevator);
+				}
 			}
 		});
 	}

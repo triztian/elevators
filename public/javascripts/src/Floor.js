@@ -14,9 +14,6 @@ export default function Floor(props) {
 			<ControlPanel 
 				floors={props.floors}
 				floorNumber={props.floorNumber}/>
-			<div></div>
-			<div></div>
-			<div></div>
 		</div>
 	)
 }

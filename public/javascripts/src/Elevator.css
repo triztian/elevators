@@ -1,0 +1,16 @@
+
+.Elevator {
+	width: 10em;
+	height: 8em;
+	display: inline-block;
+	border: solid 1px yellow;
+	background-color: cadetblue;
+}
+
+.Elevator h4 {
+	text-align: center;
+}
+
+.Elevator h6 {
+	text-align: center;
+}

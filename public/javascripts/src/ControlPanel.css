@@ -1,8 +1,8 @@
 
 .ControlPanel {
-	margin-top: 5px;
 	min-width: 20em;
-	height: 100%;
+	height: 8em;
+	outline: solid 1px green;
 }
 
 .ControlPanel .CallButton {

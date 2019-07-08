@@ -4,6 +4,7 @@ import './App.css';
 import ElevatorAPI from './ElevatorAPI/Api'
 
 import Floor from './Floor'
+import Elevator from './Elevator'
 
 export default function App() {
 	
@@ -22,9 +23,16 @@ export default function App() {
 	return (
 		<div className="App">
 			<h1 className="App-Header">Elevator</h1>
-			<div className="Floors">{floors.reverse().map(floor => {
-				return <Floor key={`f${floor.number}`} floors={floors} floorName={floor.name} floorNumber={floor.number} />
-			})}</div>
+			<div className="Building">
+				<div className="Floors">{floors.reverse().map(floor => {
+					return <Floor key={`f${floor.number}`} floors={floors} floorName={floor.name} floorNumber={floor.number} />
+				})}</div>
+				<div className="Elevators">
+					{[...Array(3).keys()].map(n =>
+							<Elevator key={'E'+n} elevatorID={n} />
+					)}
+				</div>
+			</div>
 		</div>
 	);
 }

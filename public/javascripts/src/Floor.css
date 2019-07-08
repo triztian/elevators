@@ -1,5 +1,6 @@
 
 .Floor {
+	height: 8em;
 	width: 100%;
 	border: solid 1px blue;
 }
@@ -18,4 +19,5 @@
 
 .Floor > .ControlPanel {
 	min-width: 10em;
+	height: 100%;
 }
