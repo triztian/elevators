@@ -1,12 +1,14 @@
 # Summary
 
 - This coding challenge is designed for a Senior Fullstack Engineer
+
 - **Part 1** asks you to simulate an elevator and connect a backend Java API to a React frontend
 - **Part 2** asks you short questions about immutability
 
 # Part 1 - elevator simulation
 
 ## Java Backend API
+
 - There are 3 elevators in a 16-floor building
 - Implement a Java simulator system that schedules the elevators randomly
 - Start scheduling when simulator's **start()** method is invoked
@@ -16,12 +18,15 @@
 - Create a scheduler that enqueues each Call Request to any random elevator
 
 ## React/Javascript Frontend
+
 - Display elevator positions
 - Display each floor
 - Display a clickable Destination-Specific Call Button on each floor
-- Allow user to click Destination-Specific Call Button to request an elevator on a particular floor; this request should be sent to the Java backend API
+- Allow user to click Destination-Specific Call Button to request an elevator on a particular floor; 
+  this request should be sent to the Java backend API
 
 ## Assumptions
+
 - Every elevator serves every floor of the building; there are exactly 16 floors
 - Passengers instantly enter and exit
 - Each elevator has infinite capacity
