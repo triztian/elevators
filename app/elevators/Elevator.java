@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 /**
  * 
  */
-public final class Elevator {
+public final class Elevator extends Observable {
 
 	public static enum Direction {
 		UP,
@@ -40,8 +40,10 @@ public final class Elevator {
 
 	/**
 	 * Moves the elevator to the next in the direction of the target floor.
+	 * 
+	 * @return true if the internal state of the elevator changed, false otherwise.
 	 */
-	private void move() {
+	private boolean move() {
 
 		debug("currentFloor: {}, targetFloor: {}, direction: {}", currentFloor, targetFloor, getDirection());
 
@@ -50,13 +52,13 @@ public final class Elevator {
 		}
 
 		if (targetFloor == null) {
-			return;
+			return false;
 		}
 
 		if (targetFloor == currentFloor) {
 			currentFloor = targetFloor;
 			targetFloor = null;
-			return;
+			return false;
 		}
 			
 		if (getDirection() == Direction.UP)
@@ -65,6 +67,7 @@ public final class Elevator {
 		if (getDirection() == Direction.DOWN)
 			currentFloor = currentFloor.previous();
 
+		return true;
 	}
 
 	/**
@@ -119,15 +122,59 @@ public final class Elevator {
 		return getDirection() != Direction.NONE;
 	}
 
-	private class MoveTask implements Runnable {
-		@Override
-		public void run() {
-			move(); // method on Elevator
-		}
+	/**
+	 * Provides the a Readonly view of the elevator's status at a given point. Useful to 
+	 * avoid passing the actual elevator instance around.
+	 */
+	public synchronized Status getStatus() {
+		return new Status(
+			ID,
+			currentFloor, 
+			targetFloor, 
+			getDirection(),
+			isMoving(), 
+			-1 // FIXME: Provide proper implementation
+		);
 	}
 
 	public synchronized void start() {
 		driveSystem.start();
+	}
+
+	/**
+	 * This class is passed to the DriveSystem on every "tick"
+	 * it will call the `run` method which will trigger the update of the elevator's internal 
+	 * state.
+	 */
+	private class MoveTask implements Runnable {
+		@Override
+		public void run() {
+			if (move()) {
+				setChanged();
+				notifyObservers(getStatus());
+			}
+		}
+	}
+
+	/**
+	 * A helper class that provides a readonly view to the elevator's status
+	 */
+	public static class Status {
+		public final String ID; 
+		public final Floor currentFloor;
+		public final Floor targetFloor;
+		public final Direction direction;
+		public final boolean isMoving;
+		public final int distance;
+
+		public Status(final String id, final Floor currentFloor, final Floor targetFloor, final Direction direction, final boolean isMoving, final int distance) {
+			this.ID = id;
+			this.currentFloor = currentFloor;
+			this.targetFloor = targetFloor;
+			this.direction =  direction;
+			this.isMoving = isMoving;
+			this.distance = distance;
+		}
 	}
 
 	// --- logging helpers --
@@ -143,7 +190,6 @@ public final class Elevator {
 	private void debug(final String format, Object... args) {
 
 		if (logger == null) return;
-
 
 		logger.debug(ID + " " + format, args);
 

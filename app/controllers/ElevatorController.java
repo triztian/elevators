@@ -111,7 +111,8 @@ public class ElevatorController extends Controller {
 	 */
 	public WebSocket websocketUpdates(final Integer id) {
 		return WebSocket.Text.accept(
-		request -> ActorFlow.actorRef(ElevatorWebSocketActor::props, actorSystem, materializer));
+			request -> ActorFlow.actorRef(ElevatorWebSocketActor::props, actorSystem, materializer)
+		);
 	}
 	
 	/**
