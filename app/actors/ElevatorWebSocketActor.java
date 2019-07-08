@@ -2,9 +2,10 @@ package actors;
 
 import java.util.*;
 
-import play.libs.Json;
-
 import akka.actor.*;
+import play.libs.Json;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import elevators.Elevator;
 
@@ -19,6 +20,8 @@ public class ElevatorWebSocketActor extends AbstractActor {
 	 * The id of the websocket connection associated to this actor instance.
 	 */
 	private final Integer connID;
+
+	private final Logger logger;
 	
 	/**
 	 * 
@@ -26,6 +29,7 @@ public class ElevatorWebSocketActor extends AbstractActor {
 	public ElevatorWebSocketActor(ActorRef out) {
 		this.out = out;
 		this.connID = registerConnection(out);
+		this.logger = LoggerFactory.getLogger("websocket");
 	}
 	
 	@Override
@@ -40,6 +44,7 @@ public class ElevatorWebSocketActor extends AbstractActor {
 	 * Cleanup after the websocket connection dies.
 	 */
 	public void postStop() throws Exception {
+		logger.debug("unregistering: {}", connID);
 		unregisterConnection(connID);
 	  }
 
