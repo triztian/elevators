@@ -34,7 +34,7 @@
 - **Destination Floor:** The floor number requested by a passenger on another floor.
 - **Destination-Specific Call Button:** A button on a request floor that signals the intent of a passenger on her request floor to travel to a destination floor.
 - **Drive System:** An engine that moves each elevator from one floor to another at a constant velocity of 1 floor per second.
-Request Floor: The floor number from which a call button is pressed.
+- **Request Floor:** The floor number from which a call button is pressed.
 
 # Part 2 - immutability
 Completely unrelated to the elevator problem in Part 1, create a separate file with your answers:
