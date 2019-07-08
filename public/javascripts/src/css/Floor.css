@@ -21,3 +21,12 @@
 	min-width: 10em;
 	height: 100%;
 }
+
+
+/* Floor specific positions */
+
+.E0-F1 {
+	position: absolute;
+	left: 0;
+	top: calc(8em * (16 - 1) + 2em);
+}
