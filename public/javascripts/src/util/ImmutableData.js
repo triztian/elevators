@@ -1,8 +1,9 @@
 
 /**
- * 2) Implement an immutable class in JavaScript. The class fully encapsulates an array of integers, an arbitrary data object, 
- * and a `Date`. It should allow clients to specify all three when the class is constructed. Once instantiated, the value of 
- * each property should not change.
+ * 2) Implement an immutable class in JavaScript. The class fully encapsulates an array 
+ * of integers, an arbitrary data object, * and a `Date`. It should allow clients to 
+ * specify all three when the class is constructed. 
+ * Once instantiated, the value of * each property should not change.
  */
 export default class ImmutableData {
 
@@ -14,6 +15,7 @@ export default class ImmutableData {
 	 * @param {Date} date 
 	 */
 	constructor(numbers, obj, date) {
+
 		this.numbers = numbers.map(x => x); // copy using the identity function
 		this.obj = obj;
 		this.date = date;
@@ -23,6 +25,7 @@ export default class ImmutableData {
 			ImmutableData.deepFreeze(this.obj);
 			ImmutableData.deepFreeze(this.date);
 		}
+
 	}
 
 	get numbers() {
