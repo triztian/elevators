@@ -2,12 +2,13 @@ import React, {useState} from 'react';
 
 import CallButton from './CallButton'
 import FloorSelector from './FloorSelector'
+import './ControlPanel.css'
 
 import ElevatorAPI from './ElevatorAPI/Api'
 
-export default function ControlPanel(props) {
+const noneSelectedFloor = -1;
 
-	// let api = new ElevatorAPI()
+export default function ControlPanel(props) {
 
 	const [destFloor, setDestFloor] = useState(null);
 
@@ -30,7 +31,7 @@ export default function ControlPanel(props) {
 		<div className="ControlPanel">
 			<FloorSelector 
 				floors={props.floors}
-				selectedFloor={0}
+				selectedFloor={noneSelectedFloor}
 				onSelectFloor={setDestFloor}
 			/> 
 			<CallButton 

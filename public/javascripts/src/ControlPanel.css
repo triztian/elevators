@@ -1,0 +1,10 @@
+
+.ControlPanel {
+	margin-top: 5px;
+	min-width: 20em;
+	height: 100%;
+}
+
+.ControlPanel .CallButton {
+	margin-top: 3px;
+}
