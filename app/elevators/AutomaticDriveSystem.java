@@ -68,7 +68,7 @@ public final class AutomaticDriveSystem implements DriveSystem {
 	 * Schedule the configured task once; immediately.
 	 */
 	public void advance() {
-		executor.schedule(task, 0, 0, timeUnit);
+		executor.schedule(task, 0, timeUnit);
 	}
 
 }

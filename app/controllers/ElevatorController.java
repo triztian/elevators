@@ -45,6 +45,9 @@ public class ElevatorController extends Controller {
 		return ok(views.html.index.render());
 	}
 	
+	/**
+	 * 
+	 */
 	public Result postCall(int toFloor) {
 
 		logger.debug("postCall: {}", toFloor);
