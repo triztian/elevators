@@ -32,12 +32,12 @@ export default function Elevator(props) {
 	}, [props.elevatorID]);
 
 	return (
-		<div className="Elevator-Line">
+		<div className={props.debug ? "Elevator-Line debug" : "Elevator-Line"}>
 			{ [...Array(floorNumber).keys()].map(nth => 
-				<div className="Elevator-Stub" key={nth}></div>
+				<div className={props.debug ? 'Elevator-Stub debug':'Elevator-Stub'} key={nth}></div>
 			)
 			}
-			<div className="Elevator">
+			<div className={props.debug ? 'Elevator debug': 'Elevator'}>
 				<h4>E{props.elevatorID}</h4>
 				<h6>Floor {floorNumber}</h6>
 			</div>

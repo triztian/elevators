@@ -4,8 +4,6 @@
 	margin: 0;
 	display: block;
 	height: 5em;
-	/* width: 100%; */
-	border: solid 1px yellow;
 }
 
 .Floor > * {
@@ -22,4 +20,9 @@
 .Floor > .ControlPanel {
 	min-width: 10em;
 	height: 100%;
+}
+
+/* DEBUG STYLES */
+.Floor.debug {
+	border: solid 1px yellow;
 }

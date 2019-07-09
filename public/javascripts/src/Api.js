@@ -5,7 +5,7 @@ class ElevatorAPI {
 
 	/**
 	 * Returns a promise that when resolved contains an array of the 
-	 * the floors
+	 * the floors.
 	 */
 	async listFloors() {
 		const endpoint = `http://localhost:9000/floors`

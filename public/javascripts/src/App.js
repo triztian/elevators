@@ -9,6 +9,8 @@ import Elevator from './Elevator'
 export default function App() {
 	
 	const [floors, setFloors] = useState([]);
+
+	const debug = true;
 	
 	useEffect(() => {
 
@@ -24,12 +26,12 @@ export default function App() {
 			<h1 className="App-Header">Elevator</h1>
 			<div className="Building">
 				<div className="Floors">{floors.reverse().map(floor => 
-					<Floor key={`f${floor.number}`} floors={floors} floorName={floor.name} floorNumber={floor.number} />
+					<Floor key={`f${floor.number}`} floors={floors} floorName={floor.name} floorNumber={floor.number} debug={debug}/>
 				)}</div>
 				<div className="Elevators">
 					{/* 3 elevator lines */}
 					{[...Array(3).keys()].map(n =>
-							<Elevator key={'E'+n} elevatorID={n} />
+							<Elevator key={'E'+n} elevatorID={n} debug={debug} />
 					)}
 				</div>
 			</div>

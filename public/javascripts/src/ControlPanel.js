@@ -28,15 +28,17 @@ export default function ControlPanel(props) {
 	}
 
 	return (
-		<div className="ControlPanel">
+		<div className={props.debug ? 'ControlPanel debug' : 'ControlPanel'}>
 			<FloorSelector 
 				floors={props.floors}
 				selectedFloor={noneSelectedFloor}
 				onSelectFloor={setDestFloor}
+				debug={props.debug}
 			/> 
 			<CallButton 
 				floorNumber={props.floorNumber} 
 				onCallElevator={onCallElevator}
+				debug={props.debug}
 			/>
 		</div>
 	)

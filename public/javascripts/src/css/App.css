@@ -7,7 +7,7 @@ html, body {
 /* App Specific styles */
 
 .App {
-  min-width: 80vw;
+  min-width: 70vw;
   margin-left: auto;
   margin-right: auto;
   background-color: #282c34;
@@ -24,7 +24,7 @@ html, body {
 .Building {
 	margin-left: auto;
 	margin-right: auto;
-	width: 70em;
+	width: 60em;
 	min-height: calc(5em*17 + 2em);
 	border: solid 1px orange;
 	border-top-left-radius: 6px;
@@ -36,7 +36,7 @@ html, body {
 	vertical-align: top;
 	display: inline-flex;
 	flex-direction: column;
-	width: 40%;
+	width: 36.5%;
 	height: 80em;
 	min-height: calc(5em*17 + 2em);
 }
@@ -46,8 +46,7 @@ html, body {
 	display: inline-flex;
 	flex-direction: row;
 	align-items: stretch;
-	border: solid 1px white;
-	width: 59%;
+	width: 63%;
 	min-height: calc(5em*17 + 2em);
 }
 
@@ -55,4 +54,11 @@ html, body {
 	border: solid 1px gray;
 	width: 10em;
 	margin-left: 3em;
+}
+
+/* DEBUG STYLES */
+
+
+.Elevators.debug {
+	border: solid 1px white;
 }

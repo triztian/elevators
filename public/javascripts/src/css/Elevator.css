@@ -7,7 +7,6 @@
 .Elevator {
 	width: 100%;
 	height: 5em;
-	border: solid 1px yellow;
 	background-color: cadetblue;
 }
 
@@ -24,5 +23,14 @@
 .Elevator-Stub {
 	width: 100%;
 	height: 5em;
+}
+
+/* DEBUG STYLES */
+
+.Elevator.debug {
+	border: solid 1px yellow;
+}
+
+.Elevator-Stub.debug {
 	border: dashed 1px red;
 }

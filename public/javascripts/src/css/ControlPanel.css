@@ -2,7 +2,7 @@
 .ControlPanel {
 	min-width: 20em;
 	height: 8em;
-	outline: solid 1px green;
+	margin: 0;
 }
 
 .ControlPanel .CallButton {
@@ -15,4 +15,10 @@
 	margin-top: 3px;
 	width: 8em;
 	display: inline-block;
+}
+
+/* DEBUG STYLES  */
+
+.ControlPanel.debug {
+	outline: solid 1px green;
 }
