@@ -22,10 +22,21 @@ public final class Elevator extends Observable {
 
 	private DriveSystem driveSystem;
 
-	private Queue<Floor> floorQueue = new ConcurrentLinkedQueue<>();
+	/**
+	 * A queue of floor to which the elevator must move to.
+	 * This field is protecte by synchronized methods when modifying it.
+	 */
+	private Queue<Floor> floorQueue = new LinkedList<>();
 
+	/**
+	 * The current floor.
+	 */
 	private Floor currentFloor = Floor.GROUND;
 
+	/**
+	 * The destination floor, when not null, calling `move` will
+	 * advance the elevator towards this floor.
+	 */
 	private Floor targetFloor = null;
 
 	private Logger logger = null;
@@ -49,11 +60,17 @@ public final class Elevator extends Observable {
 	}
 
 	/**
-	 * 
+	 * Overrides (sets) the elevator's drive system to an instance of `ManualDriveSystem` and
+	 * returns the drive system for usage.
 	 */
 	public DriveSystem useManualDriveSystem() {
-		this.driveSystem = new ManualDriveSystem(this.new MoveTask());
-		return this.driveSystem;
+		if (driveSystem != null) {
+			driveSystem.stop();
+		}
+
+		driveSystem = new ManualDriveSystem(this.new MoveTask());
+
+		return driveSystem;
 	}
 
 	/**
@@ -61,7 +78,7 @@ public final class Elevator extends Observable {
 	 * 
 	 * @return true if the internal state of the elevator changed, false otherwise.
 	 */
-	private boolean move() {
+	private synchronized boolean move() {
 
 		// debug("[{}] currentFloor: {}, targetFloor: {}, direction: {}", floorQueue.size(), currentFloor, targetFloor, getDirection());
 
@@ -152,11 +169,14 @@ public final class Elevator extends Observable {
 			targetFloor, 
 			getDirection(),
 			isMoving(), 
-			-1, // FIXME: Provide proper implementation
+			targetFloor != null ? currentFloor.distanceTo(targetFloor) : null,
 			floorQueue.size()
 		);
 	}
 
+	/**
+	 * Start the elevator.
+	 */
 	public synchronized void start() {
 		driveSystem.start();
 	}
@@ -186,11 +206,11 @@ public final class Elevator extends Observable {
 		public final Floor targetFloor;
 		public final Direction direction;
 		public final boolean isMoving;
-		public final int distance;
+		public final Integer distance;
 		public final int queued;
 
 		public Status(final String id, final Floor currentFloor, final Floor targetFloor, 
-			final Direction direction, final boolean isMoving, final int distance, final int queued) {
+			final Direction direction, final boolean isMoving, final Integer distance, final int queued) {
 			this.ID = id;
 			this.currentFloor = currentFloor;
 			this.targetFloor = targetFloor;

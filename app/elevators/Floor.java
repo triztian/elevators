@@ -73,8 +73,24 @@ public enum Floor {
 	/**
 	 * Determines whether this floor is above another one.
 	 */
-	public boolean isAbove(Floor other) {
+	public boolean isAbove(final Floor other) {
 		if (other == null) return false;
 		return ordinal() > other.ordinal();
+	}
+
+	/**
+	 * Calculates the distance to another floor. It uses the ordinal value 
+	 * of each floor and substracts it to the `destination`.
+	 * 
+	 * @throws IllegalArgumentException If the `destination` parameter is null.
+	 * 
+	 * @return An `int` representing the distance.
+	 */
+	public int distanceTo(final Floor destination) {
+
+		if (destination == null)
+			throw new IllegalArgumentException("destination cannot be null");
+
+		return destination.ordinal() - ordinal();
 	}
 }

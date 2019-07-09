@@ -50,16 +50,25 @@ public final class AutomaticDriveSystem implements DriveSystem {
 		this.timeUnit = timeUnit;
 	}
 
+	/**
+	 * Start the task schedule with 0 delay.
+	 */
 	public void start() {
 		schedule = executor.scheduleAtFixedRate(task, 0, period, timeUnit);
 	}
 
+	/**
+	 * Cancels the task schedule.
+	 */
 	public void stop() {
 		schedule.cancel(true);
 	}
 
+	/**
+	 * Schedule the configured task once; immediately.
+	 */
 	public void advance() {
-		this.task.run();
+		executor.schedule(task, 0, 0, timeUnit);
 	}
 
 }

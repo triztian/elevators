@@ -38,4 +38,11 @@ public class FloorTest {
 		assertFalse(Floor.THIRD.isBelow(null));
 	}
 
+	@Test
+	public void testDistanceTo() {
+		assertEquals(0, Floor.GROUND.distanceTo(Floor.GROUND));
+		assertEquals(1, Floor.GROUND.distanceTo(Floor.FIRST));
+		assertEquals(-16, Floor.SIXTEENTH.distanceTo(Floor.GROUND));
+	}
+
 }

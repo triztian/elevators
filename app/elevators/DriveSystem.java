@@ -1,7 +1,8 @@
 package elevators;
 
 /**
- * 
+ * A drive system controls movement of an elevetor. It may be started, 
+ * stopped or manually triggered.
  */
 public interface DriveSystem {
 

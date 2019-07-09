@@ -9,7 +9,7 @@ import actors.ElevatorWebSocketActor;
 import util.RangeLooper;
 
 /**
- * 
+ * A singleton class that represents and interfaces with the Building's 3 elevators.
  */
 public final class ElevatorSystem {
 	
@@ -47,7 +47,7 @@ public final class ElevatorSystem {
 	private List<Elevator> elevators = new ArrayList<>(3);
 	
 	/**
-	 * 
+	 * Create an elevator system with default values.
 	 */
 	private ElevatorSystem() {
 		
