@@ -1,74 +1,47 @@
 package util;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * An utility class that loops over a range of integers.
  */
-public final class RangeLooper implements Iterator<Integer> {
+public final class RangeLooper extends Looper<Integer> {
 
 	/**
-	 * The initial value that will be provided by the first call to `next`.
+	 * Creates a range looper that starts from a given lower bound up 
+	 * to (non-inclusive) an upper bound.
 	 */
-	private final int start;
-
-	/**
-	 * The lower value for this loop.
-	 */
-	private final int from;
-
-	/**
-	 * The max (non-inclusive) value for this loop.
-	 */
-	private final int to;
-
-	/**
-	 * The current value.
-	 */
-	private int current = 0;
-
-	/**
-	 * Marks whether the `start` value has been provided by the `next` method
-	 */
-	private boolean providedFirst = false;
-
-	/**
-	 * Create a new `RangeLooper` that will loop from the `from` parameter
-	 * to `to -1` (non-inclusive) and will loop to `from` if the max value
-	 * is reached.
-	 */
-	public RangeLooper(int from, int to) {
-		this.start = 0;
-		this.from = from;
-		this.to = to;
-		this.current = 0;
+	public RangeLooper(final int from, final int to) {
+		super(RangeLooper.rangeList(from, to));
 	}
 
-	@Override
-	public Integer next() {
+	/**
+	 * Create an `int[]` range from a lower bound to a non-inclusive upper bound.
+	 */
+	public static int[] range(final int from, final int to) {
 
-		if (!providedFirst) {
-			providedFirst = true;
-			return start;
-		}
+		final int size =  Math.abs(to - from);
+		final int[] seq = new int[size];
 
-		if (current + 1 >= to) {
-			current = from;
-		} else {
-			current++;
-		}
+		for (int i = 0; i < size; i++)
+			seq[i] = from + i;
 
-		return current;
-
+		return seq;
 	}
 
-	@Override
-	public boolean hasNext() {
-		return true;
+	/**
+	 * Create an `List<Integer>` range from a lower bound to a non-inclusive upper bound.
+	 */
+	public static List<Integer> rangeList(final Integer from, final Integer to) {
+		final int[] n = range(from, to);
+		final List<Integer> nl = new ArrayList<>(n.length);
+		for (int i = 0; i < n.length; i++)
+			nl.add(n[i]);
+
+		return nl;
 	}
 
-	@Override
-	public void remove() {
-		throw new UnsupportedOperationException();
-	}
 }

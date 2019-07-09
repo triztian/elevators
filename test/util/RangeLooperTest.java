@@ -11,9 +11,11 @@ public class RangeLooperTest {
 	public void testRangeLooper() {
 		final RangeLooper looper = new RangeLooper(0, 2);
 		
-		assertEquals(looper.next(), new Integer(0));
-		assertEquals(looper.next(), new Integer(1));
-		assertEquals(looper.next(), new Integer(0));
-		assertEquals(looper.next(), new Integer(1));
+		assertEquals(new Integer(0), looper.next());
+		assertEquals(new Integer(1), looper.next());
+		assertEquals(new Integer(0), looper.next());
+		assertEquals(new Integer(1), looper.next());
+
 	}
+
 }
