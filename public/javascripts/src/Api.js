@@ -68,8 +68,10 @@ class ElevatorAPI {
 
 				let elevator = JSON.parse(evt.data);
 
+				console.log("api.watchElevator", elevator);
+
 				// FIXME: This filtering should happen on the server.
-				if (`E${id}` === elevator.ID) {
+				if (`E${id}` === elevator.id) {
 					onUpdate(elevator);
 				}
 			}
