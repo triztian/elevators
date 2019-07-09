@@ -63,7 +63,7 @@ public final class Elevator extends Observable {
 	 */
 	private boolean move() {
 
-		debug("[{}] currentFloor: {}, targetFloor: {}, direction: {}", floorQueue.size(), currentFloor, targetFloor, getDirection());
+		// debug("[{}] currentFloor: {}, targetFloor: {}, direction: {}", floorQueue.size(), currentFloor, targetFloor, getDirection());
 
 		if (targetFloor == null) {
 			targetFloor = floorQueue.poll();
