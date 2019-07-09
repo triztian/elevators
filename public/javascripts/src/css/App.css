@@ -23,6 +23,7 @@ html, body {
 }
 
 .Building {
+	padding-top: 1.2em;
 	margin-left: auto;
 	margin-right: auto;
 	width: 60em;
