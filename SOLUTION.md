@@ -7,7 +7,9 @@
 
 ## Solution
 
-Basically the solution consists of the following:
+Basically the solution consists of the following
+
+You can find a video linked at the bottom of this document
 
 ### Environment
 
@@ -30,6 +32,8 @@ Basically the solution consists of the following:
 
   * A series of `controllers.APInnnnn` classes that determine the response 
    JSON structure.
+   
+    * https://github.com/valued-co/dev-triztian/tree/master/app/controllers
 
   * A `ElevatorWebSocketActor` to handle websockets (pushes elevator updates)
 
@@ -38,7 +42,7 @@ Basically the solution consists of the following:
    moves (travels to another floor) a WebSocket message (JSON) is sent to any  
    connected clients.
 
- * There are 2 drive systems one automatic and a manual one, the automatic
+ * There are 2 drive systems; one automatic and a manual one, the automatic
    owns the worker threads that process the queued floors. The manual one is
    used mostly for tests.
 
@@ -49,7 +53,9 @@ Basically the solution consists of the following:
 
 #### The Frontend consists of the following:
 
-https://github.com/valued-co/dev-triztian/tree/master/public/javascripts
+##### Video: https://github.com/valued-co/dev-triztian/blob/master/Solution/Auptix%20Elevator%20Frontend.mov
+
+ * The React Source is here: https://github.com/valued-co/dev-triztian/tree/master/public/javascripts
 
  * An `App` component that renders everything.
 
@@ -65,6 +71,8 @@ https://github.com/valued-co/dev-triztian/tree/master/public/javascripts
    provides the WebSocket endpoint. 
 
      * https://github.com/valued-co/dev-triztian/blob/master/public/javascripts/src/Api.js#L4
+     
+ * A `css` directory with styels for each component.
 
 # Part 1 - elevator simulation
 
@@ -117,20 +125,28 @@ https://github.com/valued-co/dev-triztian/tree/master/public/javascripts
 https://github.com/valued-co/dev-triztian/tree/master/public/javascripts
 
 - **Display elevator positions**  
-  The Elevators are shown as the move from floor to floor and the have a legend
+  The Elevators are shown as they move from floor to floor and the have a legend
   that displays the textual position.
   
+  ![Elevator](https://github.com/valued-co/dev-triztian/blob/master/Solution/Elevator.png)
+  
 - **Display each floor**  
-  Each floor is labled on the left side in all caps.
+  Each floor is labeled on the left side in all caps.
+  
+  ![Multiple Floors](https://github.com/valued-co/dev-triztian/blob/master/Solution/Multiple%20Floors.png)
 
 - **Display a clickable Destination-Specific Call Button on each floor**  
   The HTML selector dropdown labeled "Destination" addresses this.
+  
+  ![Control Panel](https://github.com/valued-co/dev-triztian/blob/master/Solution/ControlPanel.png)
 
 - **Allow user to click Destination-Specific Call Button to request an elevator 
-  on a particular floor; this request should be sent to the Java backend API**  
+  On a particular floor; this request should be sent to the Java backend API**  
   The HTML selector dropdown labeled "Destination" addresses this, the user
   can select a destination floor and then call the elevator and it will 
   queue the request on the backend.
+  
+   ![Control Panel](https://github.com/valued-co/dev-triztian/blob/master/Solution/ControlPanel.png)
   
 
 ## Assumptions
@@ -180,3 +196,4 @@ with your answers:
 
       * **Implementation:** https://github.com/valued-co/dev-triztian/blob/master/public/javascripts/src/util/ImmutableData.js#L8
       * **Tests:** https://github.com/valued-co/dev-triztian/blob/master/public/javascripts/src/test/ImmutableData.test.js#L3
+      
