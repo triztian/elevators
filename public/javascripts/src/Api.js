@@ -13,6 +13,14 @@ class ElevatorAPI {
 	}
 
 	/**
+	 * Fetch the status of an elevator.
+	 */
+	async getElevator(id) {
+		const endpoint = `http://localhost:9000/elevator/${id}`;
+		return fetch(endpoint, {mode: 'cors'}).then(r => r.json());
+	}
+
+	/**
 	 * @param {number} from The floor to which the elevator is being called from.
 	 * @param {number} to An optional destionation floor.
 	 */
