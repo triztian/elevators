@@ -23,9 +23,9 @@ export default function App() {
 		<div className="App">
 			<h1 className="App-Header">Elevator</h1>
 			<div className="Building">
-				<div className="Floors">{floors.reverse().map(floor => {
-					return <Floor key={`f${floor.number}`} floors={floors} floorName={floor.name} floorNumber={floor.number} />
-				})}</div>
+				<div className="Floors">{floors.reverse().map(floor => 
+					<Floor key={`f${floor.number}`} floors={floors} floorName={floor.name} floorNumber={floor.number} />
+				)}</div>
 				<div className="Elevators">
 					{[...Array(3).keys()].map(n =>
 							<Elevator key={'E'+n} elevatorID={n} />

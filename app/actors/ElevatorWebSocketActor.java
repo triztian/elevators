@@ -28,8 +28,9 @@ public class ElevatorWebSocketActor extends AbstractActor {
 	 */
 	public ElevatorWebSocketActor(ActorRef out) {
 		this.out = out;
-		this.connID = registerConnection(out);
 		this.logger = LoggerFactory.getLogger("websocket");
+		this.connID = registerConnection(out);
+		logger.debug("registered: {}", connID);
 	}
 	
 	@Override

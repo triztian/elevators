@@ -16,8 +16,10 @@ export default function Elevator(props) {
 		});
 	}, [props.elevatorID]);
 
-	return <div className="Elevator">
-		<h4>E{props.elevatorID}</h4>
-		<h6>Floor {floorNumber}</h6>
-	</div>
+	return (
+		<div className="Elevator">
+			<h4>E{props.elevatorID}</h4>
+			<h6>Floor {floorNumber}</h6>
+		</div>
+	)
 }

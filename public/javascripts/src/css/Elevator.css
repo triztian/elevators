@@ -1,20 +1,18 @@
 
 .Elevator {
 	width: 10em;
-	height: 8em;
-	display: inline-block;
+	height: 5em;
 	border: solid 1px yellow;
 	background-color: cadetblue;
+	margin-left: 3em;
 }
 
 .Elevator h4 {
 	text-align: center;
+	margin-top: 0.8em;
 }
 
 .Elevator h6 {
 	text-align: center;
-}
-
-.E0 {
-	
+	margin-top: 0.5em;
 }

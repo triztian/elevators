@@ -1,8 +1,11 @@
 
 .Floor {
-	height: 8em;
-	width: 100%;
-	border: solid 1px blue;
+	padding: 0;
+	margin: 0;
+	display: block;
+	height: 5em;
+	/* width: 100%; */
+	border: solid 1px yellow;
 }
 
 .Floor > * {
@@ -12,21 +15,11 @@
 }
 
 .Floor > .Floor-Name {
-	min-width: 10em;
-	min-height: 6em;
-	color: white;
+	min-width: 8em;
+	color: brown;
 }
 
 .Floor > .ControlPanel {
 	min-width: 10em;
 	height: 100%;
-}
-
-
-/* Floor specific positions */
-
-.E0-F1 {
-	position: absolute;
-	left: 0;
-	top: calc(8em * (16 - 1) + 2em);
 }
