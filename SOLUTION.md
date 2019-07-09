@@ -105,7 +105,8 @@ Basically the solution consists of the following.
 
 
 - **System accepts async input from Destination-Specific Call Buttons on each floor**  
-  Accepting a `call` (with or without destination floor) is protected by 
+  The controller accepts requests asynchronously, however the Elevator (which is the shared resource) accepts 
+  a `call` (with or without destination floor) is protected by 
   `synchronized` modifiers, the queue is non-blocking so it can be emptied
   asynchronously by worker threads (DriveSystem):
 
