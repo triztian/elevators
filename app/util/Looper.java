@@ -1,80 +1,97 @@
-// package util;
+package util;
 
-// /**
-//  * An utility class that loops over a range of integers.
-//  */
-// public final class Looper<T> implements Iterable<T> {
+import java.util.List;
+import java.util.Arrays;
+import java.util.Iterator;
 
-// 	/**
-// 	 * The initial value that will be provided by the first call to `next`.
-// 	 */
-// 	private final int start;
+/**
+ * An utility class that loops over a range of integers.
+ */
+public class Looper<T> implements Iterator<T> {
 
-// 	/**
-// 	 * The lower value for this loop.
-// 	 */
-// 	private final int from;
+	/**
+	 * The initial value that will be provided by the first call to `next`.
+	 */
+	private final int start;
 
-// 	/**
-// 	 * The max (non-inclusive) value for this loop.
-// 	 */
-// 	private final int to;
+	/**
+	 * The lower value for this loop.
+	 */
+	private final int from;
 
-// 	/**
-// 	 * The current value.
-// 	 */
-// 	private int current = 0;
+	/**
+	 * The max (non-inclusive) value for this loop.
+	 */
+	private final int to;
 
-// 	/**
-// 	 * Marks whether the `start` value has been provided by the `next` method
-// 	 */
-// 	private boolean providedFirst = false;
+	/**
+	 * The current value.
+	 */
+	private int current = 0;
 
-// 	/**
-// 	 * Create a new `RangeLooper` that will loop from the `from` parameter
-// 	 * to `to -1` (non-inclusive) and will loop to `from` if the max value
-// 	 * is reached.
-// 	 */
-// 	public Looper(final List<T> sequence) {
-// 		this.start = 0;
-// 		this.from = from;
-// 		this.to = to;
-// 		this.current = 0;
-// 	}
+	/**
+	 * Marks whether the `start` value has been provided by the `next` method
+	 */
+	private boolean providedFirst = false;
 
-// 	public Looper(final T... sequence) {
-// 		this.start = 0;
-// 		this.from = from;
-// 		this.to = to;
-// 		this.current = 0;
-// 	}
+	/**
+	 * The sequence that contains the elements that will be looped.
+	 */
+	private final List<T> sequence;
 
-// 	@Override
-// 	public T next() {
+	/**
+	 * Create a new `RangeLooper` that will loop from the `from` parameter
+	 * to `to -1` (non-inclusive) and will loop to `from` if the max value
+	 * is reached.
+	 */
+	public Looper(final List<T> sequence) {
+		this.start = 0;
+		this.from = start;
+		this.to = sequence.size();
+		this.current = 0;
+		this.sequence = sequence;
+	}
 
-// 		if (!providedFirst) {
-// 			providedFirst = true;
-// 			return start;
-// 		}
+	/**
+	 * 
+	 */
+	public Looper(final T... sequence) {
+		this.start = 0;
+		this.from = start;
+		this.to = sequence.length;
+		this.current = 0;
+		this.sequence = Arrays.asList(sequence);
+	}
 
-// 		if (current + 1 >= to) {
-// 			current = from;
-// 		} else {
-// 			current++;
-// 		}
+	/**
+	 * 
+	 */
+	@Override
+	public T next() {
 
-// 		return current;
+		if (!providedFirst) {
+			providedFirst = true;
+			return sequence.get(start);
+		}
 
-// 	}
+		if (current + 1 >= to) {
+			current = from;
+		} else {
+			current++;
+		}
 
-// 	@Override
-// 	public boolean hasNext() {
-// 		return true;
-// 	}
+		return sequence.get(current);
 
-// 	@Override
-// 	public void remove() {
-// 		throw new UnsupportedOperationException();
-// 	}
-// }
+	}
+
+	@Override
+	public boolean hasNext() {
+		return true;
+	}
+
+	@Override
+	public void remove() {
+		throw new UnsupportedOperationException();
+	}
+}
  
