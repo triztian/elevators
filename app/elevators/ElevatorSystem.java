@@ -1,6 +1,7 @@
 package elevators;
 
 import java.util.*;
+import java.util.concurrent.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,52 @@ public final class ElevatorSystem {
 	 * The list of elevator instances.
 	 */
 	private List<Elevator> elevators = new ArrayList<>(3);
+
+	/**
+	 * Call request dispatcher service.
+	 */
+	private ExecutorService executor = Executors.newFixedThreadPool(ELEVATOR_COUNT);
+
+
+	/**
+	 * A private helper class to dispatch elevator request calls.It implements
+	 * Runnable so that it can be submitted to an executor service
+	 */
+	private final class CallDispatcher implements Runnable {
+
+		private final Floor from;
+
+		public CallDispatcher(final Floor from) {
+			this.from = from;
+		}
+
+		public void run() {
+			// `elevator` belongs to the outer class
+			elevators.get((int)elevator.next()).call(from);
+		}
+	}
+
+	/**
+	 * A private helper class to dispatch elevator request calls. It implements
+	 * Runnable so that it can be submitted to an executor service
+	 */
+	private final class CallWithDestinationDispatcher implements Runnable {
+
+		private final Floor from;
+		private final Floor to;
+
+		public CallWithDestinationDispatcher(final Floor from , final Floor to) {
+			this.from = from;
+			this.to = to;
+		}
+
+		public void run() {
+			// `elevator` belongs to the outer class
+			elevators.get((int)elevator.next()).call(from, to);
+		}
+
+	}
+
 	
 	/**
 	 * Create an elevator system with default values.
@@ -82,14 +129,16 @@ public final class ElevatorSystem {
 	 * specific destination.
 	 */
 	public void call(Floor from) {
-		elevators.get((int)elevator.next()).call(from);
+		// process async
+		executor.submit(this.new CallDispatcher(from));
 	}
 
 	/**
 	 * Call the elevator from a floor with a specific destination floor.
 	 */
 	public void call(Floor from, Floor to) {
-		elevators.get((int)elevator.next()).call(from, to);
+		// process async
+		executor.submit(this.new CallWithDestinationDispatcher(from, to));
 	}
 	
 	/**
@@ -107,17 +156,17 @@ public final class ElevatorSystem {
 		
 	}
 
-	// ---- Static synchronized proxy methods -----
+	// ---- Static proxy methods -----
 	
-	public static synchronized void callElevator(Floor from) {
+	public static void callElevator(Floor from) {
 		instance.call(from);
 	}
 	
-	public static synchronized void callElevator(Floor from, Floor to) {
+	public static void callElevator(Floor from, Floor to) {
 		instance.call(from, to);
 	}
 	
-	public static synchronized Status status() {
+	public static Status status() {
 		return instance.getStatus();
 	}
 	
