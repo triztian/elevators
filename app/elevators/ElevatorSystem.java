@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import actors.ElevatorWebSocketActor;
 import util.RangeLooper;
+import util.RandomLooper;
 
 /**
  * A singleton class that represents and interfaces with the Building's 3 elevators.
@@ -39,7 +40,8 @@ public final class ElevatorSystem {
 	/**
 	 * Cycle's through elevator indexes.
 	 */
-	private static final RangeLooper elevator = new RangeLooper(0, ELEVATOR_COUNT);
+	private static final RandomLooper<Integer> elevator = new RandomLooper<Integer>(RangeLooper.rangeList(0, ELEVATOR_COUNT));
+	// private static final RangeLooper elevator = new RangeLooper(0, ELEVATOR_COUNT);
 
 	/**
 	 * The list of elevator instances.
@@ -80,14 +82,14 @@ public final class ElevatorSystem {
 	 * specific destination.
 	 */
 	public void call(Floor from) {
-		elevators.get(elevator.next()).call(from);
+		elevators.get((int)elevator.next()).call(from);
 	}
 
 	/**
 	 * Call the elevator from a floor with a specific destination floor.
 	 */
 	public void call(Floor from, Floor to) {
-		elevators.get(elevator.next()).call(from, to);
+		elevators.get((int)elevator.next()).call(from, to);
 	}
 	
 	/**
