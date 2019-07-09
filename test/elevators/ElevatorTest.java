@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ElevatorTest {
 
@@ -22,14 +23,14 @@ public class ElevatorTest {
 
 		final Elevator.Status status = elev.getStatus();
 
-		assertEquals(status.currentFloor, Floor.SECOND);
+		assertEquals(Floor.SECOND, status.currentFloor);
 
 	}
 
 	@Test
 	public void testCallWithDestinationUP() {
 
-		final Elevator elev = new Elevator("CallWithDestinationUP", Elevator.NO_DRIVE_SYSTEM, LoggerFactory.getLogger("elevator"));
+		final Elevator elev = new Elevator("CallWithDestinationUP", Elevator.NO_DRIVE_SYSTEM, LoggerFactory.getLogger(Elevator.class));
 
 		final DriveSystem driveSystem = elev.useManualDriveSystem();
 
@@ -40,15 +41,15 @@ public class ElevatorTest {
 
 		Elevator.Status status = elev.getStatus();
 
-		assertEquals(status.currentFloor, Floor.SECOND);
-		assertEquals(status.targetFloor, null);
+		assertEquals(Floor.SECOND, status.currentFloor);
+		assertEquals(null, status.targetFloor);
 
 		driveSystem.advance();
 		driveSystem.advance();
 		driveSystem.advance();
 
 		status = elev.getStatus();
-		assertEquals(status.currentFloor, Floor.FIFTH);
+		assertEquals(Floor.FIFTH, status.currentFloor);
 
 	}
 
@@ -69,7 +70,7 @@ public class ElevatorTest {
 		driveSystem.advance();
 
 		Elevator.Status status = elev.getStatus();
-		assertEquals(status.currentFloor, Floor.SIXTH);
+		assertEquals(Floor.SIXTH, status.currentFloor);
 
 		driveSystem.advance();
 		driveSystem.advance();
@@ -77,7 +78,7 @@ public class ElevatorTest {
 		driveSystem.advance();
 
 		status = elev.getStatus();
-		assertEquals(status.currentFloor, Floor.SECOND);
+		assertEquals(Floor.SECOND, status.currentFloor);
 
 	}
 
