@@ -56,7 +56,8 @@ public enum Floor {
 	 * ground floor; the ground floor is returned.
 	 */
 	public Floor previous() {
-		if (this == GROUND) return GROUND;
+		if (this == GROUND) 
+			return GROUND;
 
 		return Floor.values()[ordinal()-1];
 	}
