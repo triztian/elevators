@@ -1,27 +1,23 @@
 package elevators;
 
-import java.lang.*;
-import java.util.*;
-import java.util.concurrent.*;
-
 /**
- * The DriveSystem "powers" each elevator's move
- * action ("task"). 
+ * 
  */
-public final class DriveSystem {
+public interface DriveSystem {
 
-	private Runnable currentTask;
+	/**
+	 * Starts the DriveSystem and sets the state in a way in which it requires no further action.
+	 */
+	public void start();
 
-	private ScheduledFuture<?> future;
+	/**
+	 * Stops the drive system.
+	 */
+	public void stop();
 
-	private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
-
-	public DriveSystem(Runnable task) {
-		this.currentTask = task;
-	}
-
-	public void start() {
-		future = executor.scheduleAtFixedRate(currentTask, 0, 1, TimeUnit.SECONDS);
-	}
+	/**
+	 * Advance the drive system, "clock" it.
+	 */
+	public void advance();
 
 }

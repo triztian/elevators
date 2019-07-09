@@ -21,6 +21,9 @@ public class ElevatorWebSocketActor extends AbstractActor {
 	 */
 	private final Integer connID;
 
+	/**
+	 * A logger to output information.
+	 */
 	private final Logger logger;
 	
 	/**

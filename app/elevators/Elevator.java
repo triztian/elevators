@@ -11,6 +11,8 @@ import org.slf4j.Logger;
  */
 public final class Elevator extends Observable {
 
+	public static final DriveSystem NO_DRIVE_SYSTEM = null;
+
 	public static enum Direction {
 		UP,
 		DOWN,
@@ -30,12 +32,29 @@ public final class Elevator extends Observable {
 	private Logger logger = null;
 
 	/**
-	 * Create a new elevator.
+	 * Create a new elevator with an AutomaticDriveSystem.
 	 */
-	public Elevator(final String id, Logger logger) {
+	public Elevator(final String id, final Logger logger) {
 		this.ID = id;
-		this.driveSystem = new DriveSystem(this.new MoveTask());
 		this.logger = logger;
+		this.driveSystem = new AutomaticDriveSystem(this.new MoveTask());
+	}
+
+	/**
+	 * Create a new elevator with a custom drive system.
+	 */
+	public Elevator(final String id, final DriveSystem driveSystem, final Logger logger) {
+		this.ID = id;
+		this.driveSystem = driveSystem;
+		this.logger = logger;
+	}
+
+	/**
+	 * 
+	 */
+	public DriveSystem useManualDriveSystem() {
+		this.driveSystem = new ManualDriveSystem(this.new MoveTask());
+		return this.driveSystem;
 	}
 
 	/**
@@ -60,6 +79,9 @@ public final class Elevator extends Observable {
 			targetFloor = null;
 			return false;
 		}
+
+		if (getDirection() == Direction.NONE)
+			return false;
 			
 		if (getDirection() == Direction.UP)
 			currentFloor = currentFloor.next();
