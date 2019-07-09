@@ -55,7 +55,7 @@ public class ElevatorController extends Controller {
 			
 			ElevatorSystem.Status status = ElevatorSystem.status();
 			
-			return ok(Json.toJson(convertElevatorStatusToAPIResponse(status)));
+			return ok(Json.toJson(status));
 			
 		} catch(IllegalArgumentException ex) {
 			return badRequest(Json.toJson(new APIError("invalid floor", ex.getMessage())));
@@ -87,7 +87,7 @@ public class ElevatorController extends Controller {
 		
 		ElevatorSystem.Status status = ElevatorSystem.status();
 		
-		return ok(Json.toJson(convertElevatorStatusToAPIResponse(status)));
+		return ok(Json.toJson(status));
 		
 	}
 	
@@ -102,9 +102,9 @@ public class ElevatorController extends Controller {
 		
 		ElevatorSystem.Status status = ElevatorSystem.status();
 		
-		APIElevatorStatus apiStatus = convertElevatorStatusToAPIResponse(status);
+		APIElevator apiStatus = new APIElevator(status.elevators.get(id));
 		
-		return ok(Json.toJson(apiStatus.elevators.get(id)));
+		return ok(Json.toJson(apiStatus));
 		
 	}
 	
@@ -130,32 +130,5 @@ public class ElevatorController extends Controller {
 			request -> ActorFlow.actorRef(ElevatorWebSocketActor::props, actorSystem, materializer)
 		);
 	}
-	
-	/**
-	 * Converts the ElevatorSystem.Status class to an API reponse object
-	 */
-	public static APIElevatorStatus convertElevatorStatusToAPIResponse(ElevatorSystem.Status status) {
-		
-		APIElevatorStatus apiStatus = new APIElevatorStatus();
-		
-		int elevatorID = 0;
-		for (Map<String, Object> elevator : status.elevators) {
-			if (elevator.containsKey("direction")) {
-				apiStatus.elevators.add(new APIElevatorStatus.Elevator(
-				"E" + String.valueOf(elevatorID), 
-				elevator.get("currentFloor").toString(),
-				elevator.get("destinationFloor").toString(),
-				elevator.get("direction").toString()
-				));
-			} else {
-				apiStatus.elevators.add(new APIElevatorStatus.Elevator(
-				"E" + String.valueOf(elevatorID), 
-				elevator.get("currentFloor").toString()
-				));
-			}
-			elevatorID++;
-		}
-		
-		return apiStatus;
-	}
+
 }

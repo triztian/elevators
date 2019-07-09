@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import elevators.Elevator;
+import controllers.APIElevator;
 
 /**
  * 
@@ -90,9 +91,12 @@ public class ElevatorWebSocketActor extends AbstractActor {
 	 */
 	public static synchronized void updateStatus(Elevator.Status status) {
 
+		final APIElevator apiStatus = new APIElevator(status);
+
 		for (ActorRef conn : connections.values()) {
-			System.out.println("updateStatus: " + Json.toJson(status));
-			conn.tell(Json.toJson(status).toString(), conn);
+			final String msg = Json.toJson(apiStatus).toString();
+			System.out.println("updateStatus: " + msg);
+			conn.tell(msg, conn);
 		}
 
 	}

@@ -98,15 +98,7 @@ public final class ElevatorSystem {
 		Status status = new Status();
 
 		for (Elevator e : elevators) {
-			Map<String, Object> el = new HashMap<>();
-			el.put("currentFloor", e.getCurrentFloor());
-			
-			if (e.isMoving()) {
-				el.put("destinationFloor", e.getDestinationFloor());
-				el.put("direction", e.getDirection());
-			}
-			
-			status.elevators.add(el);
+			status.elevators.add(e.getStatus());
 		}
 		
 		return status;
@@ -131,7 +123,7 @@ public final class ElevatorSystem {
 	* This class is a snapshot of the Elevator system.
 	*/
 	public static final class Status {
-		public final List<Map<String, Object>> elevators = new ArrayList<>();
+		public final List<Elevator.Status> elevators = new ArrayList<>();
 	}
 
 }
