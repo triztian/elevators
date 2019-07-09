@@ -96,11 +96,11 @@ public class ElevatorController extends Controller {
 	 */
 	public Result getElevator(int id) {
 		
-		if (id < 0 || id > 2) { // FIXME: Hardcoded
+		ElevatorSystem.Status status = ElevatorSystem.status();
+
+		if (id < 0 || id > status.elevators.size()-1) { 
 			return badRequest(Json.toJson(new APIError("invalid elevator", "id must be between 0 and 2")));
 		}
-		
-		ElevatorSystem.Status status = ElevatorSystem.status();
 		
 		APIElevator apiStatus = new APIElevator(status.elevators.get(id));
 		
