@@ -1,10 +1,14 @@
 
+.Elevator-Line {
+	display: flex;
+	flex-direction: column-reverse;
+}
+
 .Elevator {
-	width: 10em;
+	width: 100%;
 	height: 5em;
 	border: solid 1px yellow;
 	background-color: cadetblue;
-	margin-left: 3em;
 }
 
 .Elevator h4 {
@@ -15,4 +19,10 @@
 .Elevator h6 {
 	text-align: center;
 	margin-top: 0.5em;
+}
+
+.Elevator-Stub {
+	width: 100%;
+	height: 5em;
+	border: dashed 1px red;
 }

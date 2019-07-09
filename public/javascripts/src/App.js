@@ -27,6 +27,7 @@ export default function App() {
 					<Floor key={`f${floor.number}`} floors={floors} floorName={floor.name} floorNumber={floor.number} />
 				)}</div>
 				<div className="Elevators">
+					{/* 3 elevator lines */}
 					{[...Array(3).keys()].map(n =>
 							<Elevator key={'E'+n} elevatorID={n} />
 					)}

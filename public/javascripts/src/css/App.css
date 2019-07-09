@@ -45,7 +45,14 @@ html, body {
 	vertical-align: top;
 	display: inline-flex;
 	flex-direction: row;
+	align-items: stretch;
 	border: solid 1px white;
 	width: 59%;
 	min-height: calc(5em*17 + 2em);
+}
+
+.Elevators .Elevator-Line {
+	border: solid 1px gray;
+	width: 10em;
+	margin-left: 3em;
 }
