@@ -10,6 +10,9 @@ import akka.stream.*;
 import javax.inject.Inject;
 import play.libs.streams.ActorFlow;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import elevators.Floor;
 import elevators.ElevatorSystem;
 import actors.ElevatorWebSocketActor;
@@ -22,6 +25,8 @@ public class ElevatorController extends Controller {
 	
 	private final ActorSystem actorSystem;
 	private final Materializer materializer;
+
+	private final Logger logger = LoggerFactory.getLogger("elevator-controller");
 	
 	@Inject
 	public ElevatorController(ActorSystem actorSystem, Materializer materializer) {
@@ -41,9 +46,12 @@ public class ElevatorController extends Controller {
 	}
 	
 	public Result postCall(int toFloor) {
+
+		logger.debug("postCall: {}", toFloor);
+
 		try {
 			Floor floor = Floor.fromNumber(toFloor);
-			ElevatorSystem.callFrom(floor);
+			ElevatorSystem.callElevator(floor);
 			
 			ElevatorSystem.Status status = ElevatorSystem.status();
 			
@@ -54,7 +62,12 @@ public class ElevatorController extends Controller {
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public Result postCallDestination(int fromFloor, int toFloor) {
+
+		logger.debug("postCallDestination: {} to {}", fromFloor, toFloor);
 		
 		Floor from, to;
 		
@@ -70,7 +83,7 @@ public class ElevatorController extends Controller {
 			return badRequest(Json.toJson(new APIError("invalid destination floor", ex.getMessage())));
 		}
 		
-		ElevatorSystem.callFromTo(from, to);
+		ElevatorSystem.callElevator(from, to);
 		
 		ElevatorSystem.Status status = ElevatorSystem.status();
 		
@@ -78,9 +91,12 @@ public class ElevatorController extends Controller {
 		
 	}
 	
+	/**
+	 * 
+	 */
 	public Result getElevator(int id) {
 		
-		if (id < 0 || id > 2) {
+		if (id < 0 || id > 2) { // FIXME: Hardcoded
 			return badRequest(Json.toJson(new APIError("invalid elevator", "id must be between 0 and 2")));
 		}
 		

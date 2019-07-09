@@ -115,11 +115,11 @@ public final class ElevatorSystem {
 
 	// ---- Static synchronized proxy methods -----
 	
-	public static synchronized void callFrom(Floor from) {
+	public static synchronized void callElevator(Floor from) {
 		instance.call(from);
 	}
 	
-	public static synchronized void callFromTo(Floor from, Floor to) {
+	public static synchronized void callElevator(Floor from, Floor to) {
 		instance.call(from, to);
 	}
 	

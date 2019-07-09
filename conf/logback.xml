@@ -29,6 +29,7 @@
 
   <logger name="elevator" level="DEBUG" />
   <logger name="websocket" level="DEBUG" />
+  <logger name="elevator-controller" level="DEBUG" />
 
   <root level="WARN">
     <appender-ref ref="ASYNCFILE" />
