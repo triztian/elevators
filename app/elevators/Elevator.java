@@ -23,7 +23,7 @@ public final class Elevator extends Observable {
 
 	private DriveSystem driveSystem;
 
-	private Queue<Floor> floorQueue = new PriorityBlockingQueue<>();
+	private Queue<Floor> floorQueue = new ConcurrentLinkedQueue<>();
 
 	private Floor currentFloor = Floor.GROUND;
 
@@ -64,19 +64,13 @@ public final class Elevator extends Observable {
 	 */
 	private boolean move() {
 
-		debug("currentFloor: {}, targetFloor: {}, direction: {}", currentFloor, targetFloor, getDirection());
+		debug("[{}] currentFloor: {}, targetFloor: {}, direction: {}", floorQueue.size(), currentFloor, targetFloor, getDirection());
 
 		if (targetFloor == null) {
 			targetFloor = floorQueue.poll();
 		}
 
 		if (targetFloor == null) {
-			return false;
-		}
-
-		if (targetFloor == currentFloor) {
-			currentFloor = targetFloor;
-			targetFloor = null;
 			return false;
 		}
 
@@ -88,6 +82,10 @@ public final class Elevator extends Observable {
 
 		if (getDirection() == Direction.DOWN)
 			currentFloor = currentFloor.previous();
+
+		if (targetFloor == currentFloor) {
+			targetFloor = null;
+		}
 
 		return true;
 	}
@@ -155,7 +153,8 @@ public final class Elevator extends Observable {
 			targetFloor, 
 			getDirection(),
 			isMoving(), 
-			-1 // FIXME: Provide proper implementation
+			-1, // FIXME: Provide proper implementation
+			floorQueue.size()
 		);
 	}
 
@@ -182,21 +181,34 @@ public final class Elevator extends Observable {
 	 * A helper class that provides a readonly view to the elevator's status
 	 */
 	public static class Status {
+
 		public final String ID; 
 		public final Floor currentFloor;
 		public final Floor targetFloor;
 		public final Direction direction;
 		public final boolean isMoving;
 		public final int distance;
+		public final int queued;
 
-		public Status(final String id, final Floor currentFloor, final Floor targetFloor, final Direction direction, final boolean isMoving, final int distance) {
+		public Status(final String id, final Floor currentFloor, final Floor targetFloor, 
+			final Direction direction, final boolean isMoving, final int distance, final int queued) {
 			this.ID = id;
 			this.currentFloor = currentFloor;
 			this.targetFloor = targetFloor;
 			this.direction =  direction;
 			this.isMoving = isMoving;
 			this.distance = distance;
+			this.queued = queued;
 		}
+
+		@Override
+		public String toString() {
+			return String.format(
+				"Status(ID: %s, queued: %d, currentFloor: %s, targetFloor: %s, direction: %s, isMoving: %b, distance: %d", 
+				ID, queued, currentFloor, targetFloor, direction, isMoving, distance
+			);
+		}
+
 	}
 
 	// --- logging helpers --

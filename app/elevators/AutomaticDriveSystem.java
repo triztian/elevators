@@ -9,15 +9,30 @@ import java.util.concurrent.*;
  */
 public final class AutomaticDriveSystem implements DriveSystem {
 
-	private Runnable currentTask;
+	/**
+	 * The task to run.
+	 */
+	private Runnable task;
 
-	private ScheduledFuture<?> future;
-
-	private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
-
+	/**
+	 * The interval value.
+	 */
 	private final long period;
 
+	/**
+	 * The time units corresponding to the interval.
+	 */
 	private final TimeUnit timeUnit;
+
+	/**
+	 * The schedule of tasks the the system is running.
+	 */
+	private ScheduledFuture<?> schedule;
+
+	/**
+	 * The service that executes the tasks in background threads.
+	 */
+	private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
 
 	/**
 	 * Create an automatic drive system with a 1 Second interval.
@@ -36,15 +51,15 @@ public final class AutomaticDriveSystem implements DriveSystem {
 	}
 
 	public void start() {
-		future = executor.scheduleAtFixedRate(currentTask, 0, 1, TimeUnit.SECONDS);
+		schedule = executor.scheduleAtFixedRate(task, 0, period, timeUnit);
 	}
 
 	public void stop() {
-		future.cancel();
+		schedule.cancel(true);
 	}
 
 	public void advance() {
-		this.currentTask.run();
+		this.task.run();
 	}
 
 }
