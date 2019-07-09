@@ -7,9 +7,9 @@
 
 ## Solution
 
-Basically the solution consists of the following
+Basically the solution consists of the following.
 
-You can find a video linked at the bottom of this document
+ * You can find a video here: https://github.com/valued-co/dev-triztian/blob/master/Solution/Auptix%20Elevator%20Frontend.mov
 
 ### Environment
 
@@ -41,6 +41,8 @@ You can find a video linked at the bottom of this document
    are observable and are observed for "movement", whenever an elevator  
    moves (travels to another floor) a WebSocket message (JSON) is sent to any  
    connected clients.
+   
+ * A `Floor` enum with utility functions.
 
  * There are 2 drive systems; one automatic and a manual one, the automatic
    owns the worker threads that process the queued floors. The manual one is
@@ -52,8 +54,6 @@ You can find a video linked at the bottom of this document
  * Static assets are served under `/app`
 
 #### The Frontend consists of the following:
-
-##### Video: https://github.com/valued-co/dev-triztian/blob/master/Solution/Auptix%20Elevator%20Frontend.mov
 
  * The React Source is here: https://github.com/valued-co/dev-triztian/tree/master/public/javascripts
 
