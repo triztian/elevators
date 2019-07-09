@@ -28,10 +28,10 @@ export default function App() {
 				<div className="Floors">{floors.reverse().map(floor => 
 					<Floor key={`f${floor.number}`} floors={floors} floorName={floor.name} floorNumber={floor.number} debug={debug}/>
 				)}</div>
-				<div className="Elevators">
+				<div className={debug ? 'Elevators debug': 'Elevators'}>
 					{/* 3 elevator lines */}
 					{[...Array(3).keys()].map(n =>
-							<Elevator key={'E'+n} elevatorID={n} debug={debug} />
+							<Elevator key={'E'+n} elevatorID={n} debug={debug} floors={floors}/>
 					)}
 				</div>
 			</div>

@@ -1,7 +1,7 @@
 
 .Elevator-Line {
 	display: flex;
-	flex-direction: column-reverse;
+	flex-direction: column;
 }
 
 .Elevator {
@@ -28,9 +28,9 @@
 /* DEBUG STYLES */
 
 .Elevator.debug {
-	border: solid 1px yellow;
+	outline: solid 1px yellow;
 }
 
 .Elevator-Stub.debug {
-	border: dashed 1px red;
+	outline: dashed 1px red;
 }

@@ -31,16 +31,21 @@ export default function Elevator(props) {
 		});
 	}, [props.elevatorID]);
 
+	let slots = props.floors.map(f => {
+		if (floorNumber === f.number) {
+			return (
+				<div id={`EF${f.number}`} className={props.debug ? 'Elevator debug': 'Elevator'} key={f.number}>
+					<h4>E{props.elevatorID}</h4>
+					<h6>Floor {floorNumber}</h6>
+				</div>
+			);
+		}
+		return <div id={`EF${f.number}`} className={props.debug ? 'Elevator-Stub debug':'Elevator-Stub'} key={f.number}></div>
+	});
+
 	return (
 		<div className={props.debug ? "Elevator-Line debug" : "Elevator-Line"}>
-			{ [...Array(floorNumber).keys()].map(nth => 
-				<div className={props.debug ? 'Elevator-Stub debug':'Elevator-Stub'} key={nth}></div>
-			)
-			}
-			<div className={props.debug ? 'Elevator debug': 'Elevator'}>
-				<h4>E{props.elevatorID}</h4>
-				<h6>Floor {floorNumber}</h6>
-			</div>
+			{slots}
 		</div>
 	)
 }

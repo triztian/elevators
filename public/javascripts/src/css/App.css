@@ -33,21 +33,22 @@ html, body {
 }
 
 .Floors {
-	vertical-align: top;
+	vertical-align: bottom;
 	display: inline-flex;
 	flex-direction: column;
+	justify-content: flex-end;
 	width: 36.5%;
-	height: 80em;
-	min-height: calc(5em*17 + 2em);
+	height: 100%;
 }
 
 .Elevators {
-	vertical-align: top;
+	vertical-align: bottom;
 	display: inline-flex;
 	flex-direction: row;
 	align-items: stretch;
 	width: 63%;
-	min-height: calc(5em*17 + 2em);
+	/* min-height: calc(5em*17 + 2em); */
+	height: 100%;
 }
 
 .Elevators .Elevator-Line {
@@ -60,5 +61,9 @@ html, body {
 
 
 .Elevators.debug {
-	border: solid 1px white;
+	outline: solid 1px white;
+}
+
+.Floors.debug {
+	outline: solid 1px purple;
 }
