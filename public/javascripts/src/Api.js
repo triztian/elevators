@@ -18,9 +18,13 @@ class ElevatorAPI {
 	 */
 	async callElevator(from, to) {
 
+		if (!Number.isInteger(parseInt(from))) {
+			return new Error("from argument must be a valid number");
+		}
+
 		let endpoint = `http://localhost:9000/floor/${from}`;
 
-		if (Number.isInteger(to)) {
+		if (to !== null && to !== undefined && Number.isInteger(parseInt(to))) {
 			endpoint += `/to/${to}`
 		}
 		
