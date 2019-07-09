@@ -4,6 +4,7 @@
 	margin: 0;
 	display: block;
 	height: 5em;
+	border-bottom: dashed 2px darkolivegreen;
 }
 
 .Floor > * {
@@ -13,8 +14,9 @@
 }
 
 .Floor > .Floor-Name {
-	min-width: 8em;
+	min-width: 7em;
 	color: brown;
+	margin-left: 1.5em;
 }
 
 .Floor > .ControlPanel {

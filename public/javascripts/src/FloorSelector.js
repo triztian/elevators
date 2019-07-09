@@ -12,7 +12,8 @@ export default function FloorSelector(props) {
 
 	return (
 		<div className="FloorSelector">
-			<select onChange={onChange} value={selectedFloor}>
+			<label htmlFor={`FS${props.floorNumber}`}>Destination</label>
+			<select id={`FS${props.floorNumber}`} onChange={onChange} value={selectedFloor}>
 				<option value="-1">None</option>
 				{props.floors.map(f => {
 					return (<option key={`fo${f.number}`} value={f.number}>{f.name}</option>);

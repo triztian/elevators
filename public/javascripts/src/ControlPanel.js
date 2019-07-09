@@ -30,6 +30,7 @@ export default function ControlPanel(props) {
 	return (
 		<div className={props.debug ? 'ControlPanel debug' : 'ControlPanel'}>
 			<FloorSelector 
+				floorNumber={props.floorNumber} 
 				floors={props.floors}
 				selectedFloor={noneSelectedFloor}
 				onSelectFloor={setDestFloor}

@@ -10,7 +10,7 @@ export default function App() {
 	
 	const [floors, setFloors] = useState([]);
 
-	const debug = true;
+	const debug = false;
 	
 	useEffect(() => {
 

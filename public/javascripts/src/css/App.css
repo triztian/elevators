@@ -2,6 +2,7 @@ html, body {
 	padding: 0;
 	margin: 0;
 	background-color: #282c34;
+	font-family:'Lato', Verdana, Helvetica, sans-serif;
 }
 
 /* App Specific styles */
@@ -26,10 +27,13 @@ html, body {
 	margin-right: auto;
 	width: 60em;
 	min-height: calc(5em*17 + 2em);
-	border: solid 1px orange;
+	/* border: solid 1px orange; */
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 	background-color: #ddd3b8;
+	-webkit-box-shadow: inset 13px 9px 7px -5px rgba(143,107,53,1);
+	-moz-box-shadow: inset 13px 9px 7px -5px rgba(143,107,53,1);
+	box-shadow: inset 13px 9px 7px -5px rgba(143,107,53,1);
 }
 
 .Floors {
@@ -52,12 +56,15 @@ html, body {
 }
 
 .Elevators .Elevator-Line {
-	border: solid 1px gray;
 	width: 10em;
 	margin-left: 3em;
 }
 
 /* DEBUG STYLES */
+
+.Elevators .Elevator-Line.debug {
+	border: solid 1px gray;
+}
 
 
 .Elevators.debug {

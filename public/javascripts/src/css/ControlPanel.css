@@ -1,18 +1,21 @@
-
 .ControlPanel {
 	min-width: 20em;
 	height: 8em;
 	margin: 0;
 }
 
-.ControlPanel .CallButton {
-	margin-top: 3px;
-	width: 4em;
-	display: inline-block;
+.ControlPanel > * {
+	height: 4em;
+	margin-top: auto;
+	margin-bottom: auto;
+	vertical-align: middle;
 }
 
+.ControlPanel .CallButton {
+	width: 4em;
+} 
+
 .ControlPanel .FloorSelector {
-	margin-top: 3px;
 	width: 8em;
 	display: inline-block;
 }
@@ -21,4 +24,8 @@
 
 .ControlPanel.debug {
 	outline: solid 1px green;
+}
+
+.ControlPanel > *.debug {
+	outline: solid 1px red;
 }
