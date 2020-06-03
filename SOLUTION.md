@@ -9,7 +9,7 @@
 
 Basically the solution consists of the following.
 
- * You can find a video here: https://github.com/valued-co/dev-triztian/blob/master/Solution/Auptix%20Elevator%20Frontend.mov
+ * You can find a video here: https://github.com/triztian/elevators/blob/master/Solution/Elevator%20Frontend.mov?raw=true
 
 ### Environment
 
@@ -33,7 +33,7 @@ Basically the solution consists of the following.
   * A series of `controllers.APInnnnn` classes that determine the response 
    JSON structure.
    
-    * https://github.com/valued-co/dev-triztian/tree/master/app/controllers
+    * https://github.com/triztian/elevators/tree/master/app/controllers
 
   * A `ElevatorWebSocketActor` to handle websockets (pushes elevator updates)
 
@@ -48,14 +48,14 @@ Basically the solution consists of the following.
    owns the worker threads that process the queued floors. The manual one is
    used mostly for tests.
 
-    * **Automatic:** https://github.com/valued-co/dev-triztian/blob/master/app/elevators/AutomaticDriveSystem.java#L10
-    * **Manual:** https://github.com/valued-co/dev-triztian/blob/master/app/elevators/ManualDriveSystem.java#L9
+    * **Automatic:** https://github.com/triztian/elevators/blob/master/app/elevators/AutomaticDriveSystem.java#L10
+    * **Manual:** https://github.com/triztian/elevators/blob/master/app/elevators/ManualDriveSystem.java#L9
 
  * Static assets are served under `/app`
 
 #### The Frontend consists of the following:
 
- * The React Source is here: https://github.com/valued-co/dev-triztian/tree/master/public/javascripts
+ * The React Source is here: https://github.com/triztian/elevators/tree/master/public/javascripts
 
  * An `App` component that renders everything.
 
@@ -70,7 +70,7 @@ Basically the solution consists of the following.
    the `ElevatorController` endpoints. The API is promise based. The API also 
    provides the WebSocket endpoint. 
 
-     * https://github.com/valued-co/dev-triztian/blob/master/public/javascripts/src/Api.js#L4
+     * https://github.com/elevators/blob/master/public/javascripts/src/Api.js#L4
      
  * A `css` directory with styels for each component.
 
@@ -79,29 +79,29 @@ Basically the solution consists of the following.
 ## Java Backend API
 
 - **There are 3 elevators in a 16-floor building**  
-  This is defined here: https://github.com/valued-co/dev-triztian/blob/master/app/elevators/ElevatorSystem.java#L19
+  This is defined here: https://github.com/triztian/elevators/blob/master/app/elevators/ElevatorSystem.java#L19
 
 - **Implement a Java simulator system that schedules the elevators randomly**  
   For this I'm using a simple randomly cycle counter which will schedule the request 
   to a random elevator.
 
-   * https://github.com/valued-co/dev-triztian/blob/master/app/elevators/ElevatorSystem.java#L42
-   * https://github.com/valued-co/dev-triztian/blob/master/app/util/RandomLooper.java#L11
+   * https://github.com/triztian/elevators/blob/master/app/elevators/ElevatorSystem.java#L42
+   * https://github.com/triztian/elevators/blob/master/app/util/RandomLooper.java#L11
 
 - **Start scheduling when simulator's `start()` method is invoked**  
   Part of the `ElevatorSystem` class:
 
-   * https://github.com/valued-co/dev-triztian/blob/master/app/elevators/ElevatorSystem.java#L73
+   * https://github.com/triztian/elevators/blob/master/app/elevators/ElevatorSystem.java#L73
 
 - **Every elevator starts on the ground floor**  
   Defined as a static constant on the `Elevator` class:
 
-   * https://github.com/valued-co/dev-triztian/blob/master/app/elevators/Elevator.java#L34
+   * https://github.com/triztian/elevators/blob/master/app/elevators/Elevator.java#L34
 
 - **Each elevator travels at velocity of 1 floor/sec and has its own Drive System**  
   The `AutomaticDriveSystem` class defines a default 1 floor/sec speed:
 
-   * https://github.com/valued-co/dev-triztian/blob/master/app/elevators/AutomaticDriveSystem.java#L41
+   * https://github.com/triztian/elevators/blob/master/app/elevators/AutomaticDriveSystem.java#L41
 
 
 - **System accepts async input from Destination-Specific Call Buttons on each floor**  
@@ -110,36 +110,36 @@ Basically the solution consists of the following.
   `synchronized` modifiers, the queue is non-blocking so it can be emptied
   asynchronously by worker threads (DriveSystem):
 
-    * https://github.com/valued-co/dev-triztian/blob/master/app/elevators/ElevatorSystem.java#L112
-	* https://github.com/valued-co/dev-triztian/blob/master/app/elevators/Elevator.java#L112
+    * https://github.com/triztian/elevators/blob/master/app/elevators/ElevatorSystem.java#L112
+	* https://github.com/triztian/elevators/blob/master/app/elevators/Elevator.java#L112
 
 - **Create a scheduler that enqueues each Call Request to any random elevator**  
   For this I'm using a simple randomly cycle counter (`RandomLooper`) which will  schedule the request 
   the a random elevator.
 
-   * https://github.com/valued-co/dev-triztian/blob/master/app/elevators/ElevatorSystem.java#L42
-   * https://github.com/valued-co/dev-triztian/blob/master/app/util/RandomLooper.java#L11
+   * https://github.com/triztian/elevators/blob/master/app/elevators/ElevatorSystem.java#L42
+   * https://github.com/triztian/elevators/blob/master/app/util/RandomLooper.java#L11
 
 
 ## React/Javascript Frontend
 
-https://github.com/valued-co/dev-triztian/tree/master/public/javascripts
+https://github.com/triztian/elevators/tree/master/public/javascripts
 
 - **Display elevator positions**  
   The Elevators are shown as they move from floor to floor and the have a legend
   that displays the textual position.
   
-  ![Elevator](https://github.com/valued-co/dev-triztian/blob/master/Solution/Elevator.png)
+  ![Elevator](https://github.com/triztian/elevators/blob/master/Solution/Elevator.png)
   
 - **Display each floor**  
   Each floor is labeled on the left side in all caps.
   
-  ![Multiple Floors](https://github.com/valued-co/dev-triztian/blob/master/Solution/Multiple%20Floors.png)
+  ![Multiple Floors](https://github.com/triztian/elevators/blob/master/Solution/Multiple%20Floors.png)
 
 - **Display a clickable Destination-Specific Call Button on each floor**  
   The HTML selector dropdown labeled "Destination" addresses this.
   
-  ![Control Panel](https://github.com/valued-co/dev-triztian/blob/master/Solution/ControlPanel.png)
+  ![Control Panel](https://github.com/triztian/elevators/blob/master/Solution/ControlPanel.png)
 
 - **Allow user to click Destination-Specific Call Button to request an elevator 
   On a particular floor; this request should be sent to the Java backend API**  
@@ -147,7 +147,7 @@ https://github.com/valued-co/dev-triztian/tree/master/public/javascripts
   can select a destination floor and then call the elevator and it will 
   queue the request on the backend.
   
-   ![Control Panel](https://github.com/valued-co/dev-triztian/blob/master/Solution/ControlPanel.png)
+   ![Control Panel](https://github.com/triztian/elevators/blob/master/Solution/ControlPanel.png)
   
 
 ## Assumptions
@@ -187,14 +187,14 @@ with your answers:
    accessors for each. The value returned by each accessor should not change 
    after the object is instantiated**  
 
-     * **Implementation:** https://github.com/valued-co/dev-triztian/blob/master/app/util/ImmutableData.java#L14
-     * **Tests:** https://github.com/valued-co/dev-triztian/blob/master/test/util/ImmutableDataTest.java#L14
+     * **Implementation:** https://github.com/triztian/elevators/blob/master/app/util/ImmutableData.java#L14
+     * **Tests:** https://github.com/triztian/elevators/blob/master/test/util/ImmutableDataTest.java#L14
  
   2. **Implement an immutable class in JavaScript. The class fully encapsulates 
      an array of integers, an arbitrary data object, and a `Date`. It should 
      allow clients to specify all three when the class is constructed. Once 
      instantiated, the value of each property should not change**
 
-      * **Implementation:** https://github.com/valued-co/dev-triztian/blob/master/public/javascripts/src/util/ImmutableData.js#L8
-      * **Tests:** https://github.com/valued-co/dev-triztian/blob/master/public/javascripts/src/test/ImmutableData.test.js#L3
+      * **Implementation:** https://github.com/triztian/elevators/blob/master/public/javascripts/src/util/ImmutableData.js#L8
+      * **Tests:** https://github.com/triztian/elevators/blob/master/public/javascripts/src/test/ImmutableData.test.js#L3
       
