@@ -16,7 +16,7 @@ class ElevatorAPI {
 	 * Fetch the status of an elevator.
 	 */
 	async getElevator(id) {
-		const endpoint = `http://mcmelevators.herokuapp.com/elevator/${id}`;
+		const endpoint = `https://mcmelevators.herokuapp.com/elevator/${id}`;
 		return fetch(endpoint, {mode: 'cors'}).then(r => r.json());
 	}
 
@@ -30,7 +30,7 @@ class ElevatorAPI {
 			return new Error("from argument must be a valid number");
 		}
 
-		let endpoint = `http://mcmelevators.herokuapp.com/floor/${from}`;
+		let endpoint = `https://mcmelevators.herokuapp.com/floor/${from}`;
 
 		if (to !== null && to !== undefined && Number.isInteger(parseInt(to))) {
 			endpoint += `/to/${to}`
