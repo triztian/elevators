@@ -55,7 +55,7 @@ class ElevatorAPI {
 			id = elevatorID.substring(1);
 		}
 
-		const endpoint = `ws://mcmelevators.herokuapp.com/elevator/${id}/updates`;
+		const endpoint = `wss://mcmelevators.herokuapp.com/elevator/${id}/updates`;
 
 		return new Promise((resolve, reject) => {
 			let ws = new WebSocket(endpoint, '*');
