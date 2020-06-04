@@ -8,7 +8,7 @@ class ElevatorAPI {
 	 * the floors.
 	 */
 	async listFloors() {
-		const endpoint = `http://localhost:9000/floors`
+		const endpoint = `https://mcmelevators.herokuapp.com/floors`
 		return fetch(endpoint, {mode: 'cors'}).then(r => r.json());
 	}
 
@@ -16,7 +16,7 @@ class ElevatorAPI {
 	 * Fetch the status of an elevator.
 	 */
 	async getElevator(id) {
-		const endpoint = `http://localhost:9000/elevator/${id}`;
+		const endpoint = `http://mcmelevators.herokuapp.com/elevator/${id}`;
 		return fetch(endpoint, {mode: 'cors'}).then(r => r.json());
 	}
 
@@ -30,7 +30,7 @@ class ElevatorAPI {
 			return new Error("from argument must be a valid number");
 		}
 
-		let endpoint = `http://localhost:9000/floor/${from}`;
+		let endpoint = `http://mcmelevators.herokuapp.com/floor/${from}`;
 
 		if (to !== null && to !== undefined && Number.isInteger(parseInt(to))) {
 			endpoint += `/to/${to}`
@@ -55,7 +55,7 @@ class ElevatorAPI {
 			id = elevatorID.substring(1);
 		}
 
-		const endpoint = `ws://localhost:9000/elevator/${id}/updates`;
+		const endpoint = `ws://mcmelevators.herokuapp.com/elevator/${id}/updates`;
 
 		return new Promise((resolve, reject) => {
 			let ws = new WebSocket(endpoint, '*');
